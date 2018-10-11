@@ -22,15 +22,15 @@ class ProductService {
         return self.axios.get(`${self.baseUrl}/${id}`);
     }
 
-    // update(model) {
-    //     let self = this;
-    //     return self.axios.put(`${self.baseUrl}`, model);
-    // }
+    update(model) {
+        let self = this;
+        return self.axios.put(`${self.baseUrl}`, model);
+    }
 
-    // remove(id){
-    //     let self = this;
-    //     return self.axios.delete(`${self.baseUrl}/${id}`);
-    // }
+    remove(id){
+        let self = this;
+        return self.axios.delete(`${self.baseUrl}/${id}`);
+    }
 }
 
 export default ProductService
