@@ -19,6 +19,7 @@
 </template>
 
 <script>
+let name;
 export default {
     data() {
         return {
