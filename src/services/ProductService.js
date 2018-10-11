@@ -12,12 +12,6 @@ class ProductService {
         return self.axios.get(`${self.baseUrl}`);
     }
 
-    // getProductQ() {
-    //     let self = this;
-    //     return self.axios.get(`${self.baseUrl}/GetProduct`);
-    // }
-    //
-
     add(model){
         let self = this;
         return self.axios.post(`${self.baseUrl}`, model);
