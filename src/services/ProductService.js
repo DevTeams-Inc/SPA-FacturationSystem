@@ -16,6 +16,7 @@ class ProductService {
     //     let self = this;
     //     return self.axios.get(`${self.baseUrl}/GetProduct`);
     // }
+    //
 
     add(model){
         let self = this;
