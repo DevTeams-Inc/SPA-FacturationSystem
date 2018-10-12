@@ -29,11 +29,11 @@ export default {
                     key: 'name'
                 },
                 {
-                    title: 'COD Producto',
+                    title: 'COD',
                     key: 'productCode'
                 },
                 {
-                    title: 'Tipo Producto',
+                    title: 'Tipo',
                     key: 'type'
                 },
                 {
