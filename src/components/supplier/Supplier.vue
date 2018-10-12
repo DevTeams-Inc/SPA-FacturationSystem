@@ -39,11 +39,11 @@ export default {
                     }
                 },
                 {
-                    title: 'Cedula Representante',
+                    title: 'Cédula',
                     key: 'dni'
                 },
                 {
-                    title: 'Direccion',
+                    title: 'Dirección',
                     key: 'address'
                 },
                 {
@@ -142,8 +142,8 @@ export default {
         },
         show(index) {
             this.$Modal.info({
-                title: 'Informacion del Suplidor',
-                content: `<b>Nombre</b>：${this.data[index].name}<br><b>Cedula Representante</b>：${this.data[index].dni}<br><b>Direccion</b>：${this.data[index].address}`
+                title: 'Información del Suplidor',
+                content: `<b>Nombre</b>：${this.data[index].name}<br><b>Cédula</b>：${this.data[index].dni}<br><b>Dirección</b>：${this.data[index].address}`
             })
         },
         remove(index) {
