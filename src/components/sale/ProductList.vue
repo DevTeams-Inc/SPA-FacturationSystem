@@ -66,7 +66,11 @@
             let product = this
            
             product.$store.state.services.ProductService
+<<<<<<< HEAD
             .getProductQ()
+=======
+            .getAll()
+>>>>>>> 9b99de330df4bba50eeb4bba50214d2057c0c83f
             .then(p => {
                 product.data = p.data
             })

@@ -19,7 +19,10 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 let name;
+=======
+>>>>>>> 9b99de330df4bba50eeb4bba50214d2057c0c83f
 export default {
     data() {
         return {
