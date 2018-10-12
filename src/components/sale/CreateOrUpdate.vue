@@ -195,7 +195,7 @@ import EmployeeList from '@/components/sale/EmployeeList'
                     type: '',
                 form: {
 
-                    sales:{
+                    sale:{
                         clientId: 0,
                         saleId: 0,
                         userId: 0,
@@ -254,17 +254,20 @@ import EmployeeList from '@/components/sale/EmployeeList'
             selectClient: function(name, clientId) {
                 let self = this
                 self.nameC = name
-                self.form.sales.clientId = clientId
+                self.form.sale.clientId = clientId
             },
             addProduct(){
 
             },
-            selectProductId: function(name, productId, quantity, pricePerSale, productCode, type, pricePerPurchase) {
+            selectProductId: function(name, productId, quantity, pricePerSale, productCode, type, pricePerPurchase , 
+            supplierId) {
                 let self = this
                 self.nameP = name
                 self.form.products.productId = productId
                 self.form.products.quantity = quantity
                 self.form.products.pricePerSale = pricePerSale
+                self.form.products.supplierId = supplierId
+                console.log(supplierId);
                 function productExist(productId){
                     return self.form.products.some(function(p){
                         return p.productId == productId
@@ -279,7 +282,8 @@ import EmployeeList from '@/components/sale/EmployeeList'
                         subTotal: quantity * pricePerSale,
                         productCode: productCode,
                         type: type,
-                        pricePerPurchase: pricePerPurchase
+                        pricePerPurchase: pricePerPurchase,
+                        supplierId:supplierId
                     });
                 } else {
                     self.$Message.error('Este Producto ya Existe');
@@ -288,7 +292,7 @@ import EmployeeList from '@/components/sale/EmployeeList'
             selectEmployee: function(name, employeeId) {
                 let self = this
                 self.nameE = name
-                self.form.sales.userId = employeeId
+                self.form.sale.userId = employeeId
             },
             get(id){
                 if(id == undefined) return;

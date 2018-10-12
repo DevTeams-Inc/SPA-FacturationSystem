@@ -84,7 +84,8 @@
             self.data[index].pricePerSale,
             self.data[index].productCode,
             self.data[index].type,
-            self.data[index].pricePerPurchase
+            self.data[index].pricePerPurchase,
+            self.data[index].supplierId
             )    
         }
     },
