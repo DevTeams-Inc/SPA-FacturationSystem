@@ -38,10 +38,6 @@ export default {
                     }
                 },
                 {
-                    title: 'Fecha Factura',
-                    key: 'registerDate'
-                },
-                {
                     title: 'Empleado',
                     key: 'name',
                     render: (h, params) => {
@@ -54,6 +50,10 @@ export default {
                             h('strong', params.row.user.name)
                         ]);
                     }
+                },
+                {
+                    title: 'Fecha Factura',
+                    key: 'registerDate'
                 },
                 {
                     title: 'Action',
@@ -102,15 +102,25 @@ export default {
     methods: {
         getAll(){
             let sale = this
+            sale.$Loading.start()
             sale.loading = true
             sale.$store.state.services.SaleService
             .getAll().then(p => {
+                sale.$Loading.finish()
                 sale.loading = false
                 sale.data = p.data
-            }).catch()
+            }).catch(e => {
+                sale.$Loading.error()
+            })
         },
         show(index) {
-            this.$router.push(`/sales/${this.data[index].saleId}/detail`)
+            this.$Modal.info({
+                title: 'Informacion de la Venta',
+                content: `<b>Nombre Cliente</b>：${this.data[index].client.name}
+                <br><b>Nombre Empleado</b>：${this.data[index].user.name}
+                <br><b>Productos</b>：${this.data[index].product}
+                `
+            })
         },
         remove(index) {
             this.data6.splice(index, 1);

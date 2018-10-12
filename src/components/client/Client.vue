@@ -124,14 +124,18 @@ export default {
     methods: {
         getAll(){
             let client = this
+            client.$Loading.start()
             client.loading = true
             client.$store.state.services.ClientService
             .getAll()
             .then(c => {
+                client.$Loading.finish();
                 client.loading = false
                 client.data = c.data
             })
-            .catch()
+            .catch(e => {
+                client.$Loading.error();
+            })
         },
 
         delete(id){

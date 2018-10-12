@@ -10,6 +10,16 @@ import locale from 'iview/dist/locale/es-ES'
 
 Vue.config.productionTip = false
 Vue.use(IView, { locale })
+
+router.beforeEach((to, from, next) => {
+  IView.LoadingBar.start();
+  next();
+})
+
+router.afterEach(route => {
+  IView.LoadingBar.finish();
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

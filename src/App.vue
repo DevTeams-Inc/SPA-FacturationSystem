@@ -51,13 +51,13 @@ export default {
 </script>
 
 <style>
-.layout{
-    border: 1px solid #d7dde4;
+/* .layout{
+    border: 0px solid #d7dde4;
     background: #f5f7f9;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
-}
+} */
 .layout-logo{
     width: 300px;
     height: 35px;
