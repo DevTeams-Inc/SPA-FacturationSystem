@@ -11,6 +11,7 @@ class ProductService {
         let self = this;
         return self.axios.get(`${self.baseUrl}`);
     }
+    //mi  cambio
     add(model){
         let self = this;
         return self.axios.post(`${self.baseUrl}`, model);
