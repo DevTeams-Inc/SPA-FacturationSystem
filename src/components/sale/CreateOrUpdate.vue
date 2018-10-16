@@ -188,8 +188,8 @@ import EmployeeList from '@/components/sale/EmployeeList'
                     productId: 0,
                     
                     supplierId: 0,
-                    quantity: 1,
-                    quantityN: 1,
+                    quantity: 0,
+                    quantityN: 0,
                     
                     pricePerPurchase: 10,
                     total: 10
@@ -244,6 +244,7 @@ import EmployeeList from '@/components/sale/EmployeeList'
                 self.form.products.quantity = quantity
                 self.form.products.pricePerSale = pricePerSale
                 self.form.products.supplierId = supplierId
+                self.form.quantityN = quantity
                 function productExist(productId){
                     return self.form.products.some(function(p){
                         return p.productId == productId
@@ -279,14 +280,14 @@ import EmployeeList from '@/components/sale/EmployeeList'
                 self.$store.state.services.ProductService
                 .get(id)
                 .then(r => {
-                    self.loading = false;
-                    
+                    self.loading = false;  
                     self.form.supplierId = r.data.supplierId
                     self.form.productId = r.data.productId
                     self.form.name = r.data.name
                     self.form.productCode = r.data.productCode
                     self.form.type = r.data.type
                     self.form.quantity = r.data.quantity
+                    self.form.quantityN = r.data.quantity
                     self.form.pricePerPurchase = r.data.pricePerPurchase
                     self.form.discount = r.data.discount
                     self.$Message.success('Producto Cargado');

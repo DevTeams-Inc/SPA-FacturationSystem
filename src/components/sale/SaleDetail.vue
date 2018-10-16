@@ -57,8 +57,9 @@
         <br>
         <FormItem>
         <Col span="6" offset="6">
-            <Button type="primary" @click="save()">Agregar Venta</Button>
-        </Col>    
+            <Button type="error" @click="redirect()" icon="ios-arrow-back">Regresar</Button>
+            <Button type="success" @click="save()" icon="ios-copy-outline">Imprimir</Button>
+        </Col>   
         </FormItem>
         </Row>
     </Form>
@@ -207,6 +208,9 @@
             },
             remove (index) {
                 this.products.splice(index, 1);
+            },
+            redirect(){
+                this.$router.push('/sales');
             }
         }
     }

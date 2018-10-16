@@ -6,7 +6,10 @@ import SupplierService from '../services/SupplierService'
 import SaleService from '../services/SaleService'
 
 let apiUrl = 'http://192.168.99.169:45455/'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04b44951d33f66da7463e126223112b15e80abe8
 
 // Axios Configuration
 Axios.defaults.headers.common.Accept = 'application/json'
