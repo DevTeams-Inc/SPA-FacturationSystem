@@ -212,9 +212,7 @@ export default {
       this.$router.push("/sales");
     },
     pdf() {
-       
-        let self = this;
-
+      let self = this;
 
       let doc = new jsPDF();
       doc.setFontSize(40);
@@ -222,11 +220,11 @@ export default {
       doc.line(10, 50, 200, 50);
       doc.setFontSize(20);
       doc.text(130, 20, "Codigo: " + self.form.sale.saleId);
-      doc.text(130, 40, "Fecha: " +  self.form.sale.registerDate);
+      doc.text(130, 40, "Fecha: " + self.form.sale.registerDate);
       doc.setFontSize(20);
-      doc.text(10, 70, "Cliente: " +  self.form.sale.client.name);
-      doc.text(10, 85, "Vendedor: " +  self.form.sale.client.name);
-      doc.text(10, 100, "Correo: " +  self.form.sale.client.email);
+      doc.text(10, 70, "Cliente: " + self.form.sale.client.name);
+      doc.text(10, 85, "Vendedor: " + self.form.sale.client.name);
+      doc.text(10, 100, "Correo: " + self.form.sale.client.email);
       doc.line(10, 115, 200, 115);
       doc.setFontSize(30);
       doc.text(10, 130, "Detalle de venta");
@@ -234,26 +232,32 @@ export default {
 
       doc.setFontSize(20);
       doc.text(130, 130, "Total : $" + self.form.sale.total);
-      var columns = [
-        "Codigo",
-        "Nombre",
-        "Cantidad",
-        "Precio",
-        "Suplidor"
+
+      //add colunms in jtable
+      let columns = [
+       {title: "Codigo" , datakey:"productCode"},
+       {title: "Nombre" , datakey:"name"},
+       {title: "Cantidad" , datakey:"quantity"},
+       {title: "Precio" , datakey:"pricePerSale"},
       ];
-      var rows = [];
-      self.form.products.forEach(element => {
-        rows.push([
-          element.productCode,
-          element.name,
-          element.quantity,
-          element.pricePerSale,
-          element.supplier
-        ]);
-      });
-      //bug
-    //   doc.autoTable(columns, rows, { margin: { top: 140 } });
-      doc.save(`Factura-${self.form.sale.saleId}.pdf`);
+
+      try {
+        //this row is when the object product 
+        //is created and inserted into the table
+        var rows = [];
+        self.form.products.forEach(element => {
+          rows.push([
+            element.productCode,
+            element.name,
+            element.quantity,
+            element.pricePerSale
+          ]);
+        });
+        doc.autoTable(columns, rows, { margin: { top: 140 } });
+        doc.save(`Factura-${self.form.sale.saleId}.pdf`);
+      } catch (e) {
+        alert(e);
+      }
     }
   }
 };
