@@ -20,13 +20,29 @@
                 modalP: false,
                 data: [],
                 products: '',
+                loading: false,
                 columns: [{
                     title: 'Name',
                     key: 'name',
                 },
                 {
                     title: 'Cantidad',
-                    key: 'quantity'
+                    key: 'quantity',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Input', {
+                                props: {
+                                    type: 'number',
+                                    min: 1,
+                                    max: this.data[params.index].quantity,
+                                    value: this.data[params.index].quantity
+                                },
+                                style: {
+                                    width: '40%'
+                                },
+                            }), 
+                        ]);
+                    }
                 },
                 {
                     title: 'Opciones',
@@ -64,9 +80,11 @@
     methods: {
         getAll(){
             let product = this
+            product.loading = true
             product.$store.state.services.ProductService
             .getAll()
             .then(p => {
+                product.loading = false
                 product.data = p.data
             })
             .catch()
