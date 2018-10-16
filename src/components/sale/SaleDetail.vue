@@ -58,7 +58,7 @@
         <FormItem>
         <Col span="6" offset="6">
             <Button type="error" @click="redirect()" icon="ios-arrow-back">Regresar</Button>
-            <Button type="success" @click="save()" icon="ios-copy-outline">Imprimir</Button>
+            <Button type="success" @click="save(); pdf()" icon="ios-copy-outline">Imprimir</Button>
         </Col>   
         </FormItem>
         </Row>
@@ -67,151 +67,194 @@
     
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                data: [],
-                modal1: false,
-                loading: false,
-                columns: [{
-                    title: 'Producto',
-                    key: 'name'
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+export default {
+  data() {
+    return {
+      data: [],
+      modal1: false,
+      loading: false,
+      columns: [
+        {
+          title: "Producto",
+          key: "name"
+        },
+        {
+          title: "Cantidad",
+          key: "quantity"
+        },
+        {
+          title: "Precio",
+          key: "pricePerSale"
+        },
+        {
+          title: "SubTotal",
+          key: "subTotal"
+        },
+        {
+          title: "Opciones",
+          key: "action",
+          width: 150,
+          align: "center",
+          render: (h, params) => {
+            return h("div", [
+              h("Button", {
+                props: {
+                  type: "primary",
+                  size: "small",
+                  icon: "search"
                 },
-                {
-                    title: 'Cantidad',
-                    key: 'quantity'
+                style: {
+                  marginRight: "5px"
                 },
-                {
-                    title: 'Precio',
-                    key: 'pricePerSale'
-                }, 
-                {
-                    title: 'SubTotal',
-                    key: 'subTotal'
-                },
-                {
-                    title: 'Opciones',
-                    key: 'action',
-                    width: 150,
-                    align: 'center',
-                    render: (h, params) => {
-                        return h('div', [
-                            h('Button', {
-                                props: {
-                                    type: 'primary',
-                                    size: 'small',
-                                    icon: 'search'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.show(params.index)
-                                    }
-                                }
-                            }),
-                            h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small',
-                                    icon: 'close'
-                                },
-                                style: {
-                                    marginRight: '5px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.remove(params.index)
-                                    }
-                                }
-                            }),
-                            h('Button', {
-                                props: {
-                                    type: 'success',
-                                    size: 'small',
-                                    icon: 'edit'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.edit(params.index)
-                                    }
-                                }
-                            })
-                        ]);
-                    }
+                on: {
+                  click: () => {
+                    this.show(params.index);
+                  }
                 }
-            ],
-                form: {
-                    products:[],
-                    sale: []
+              }),
+              h("Button", {
+                props: {
+                  type: "error",
+                  size: "small",
+                  icon: "close"
                 },
-            
-            }
-        },
-        computed: {
-            pageTitle() {
-              let self = this 
-                return  'Agregar Venta'; 
-            },
-            // total: function(){
-            //     let total = []
-            //     Object.entries(this.products).forEach(([key, val])=> {
-            //         total.push(val.subTotal);
-            //     });
-            //     return (this.form.total = total.reduce(function(total, num){
-            //         return (total += Number(num))
-            //     }), 0);
-            // }
-        },
-        created() {
-            let self = this
-            self.get(self.$route.params.id)
-        },
-        methods: {
-            get(id){
-                if(id == undefined) return;
-
-                let self = this
-                
-                self.loading = true
-                self.$store.state.services.SaleService
-                .get(id)
-                .then(r => {
-                    self.loading = false;
-                    self.form.products = r.data.products;
-                    self.form.sale = r.data.sale;
-                })
-                .catch(r => {
-                    self.$Message.error('Error!');
-                });
-            },
-            save () {
-                let self = this
-            
-                self.loading = true 
-                    
-                    self.$store.state.services.SaleService
-                    .add(self.form)
-                    .then(r => {
-                        self.loading = false;
-                        self.$Message.success('Agregado');
-                        self.$router.push('/sales');
-                    })
-                    .catch(r => {
-                        self.$Message.error('Error!');
-                    });
-                        
-            },
-            handleReset (form) {
-                this.$refs[form].resetFields();
-            },
-            remove (index) {
-                this.products.splice(index, 1);
-            },
-            redirect(){
-                this.$router.push('/sales');
-            }
+                style: {
+                  marginRight: "5px"
+                },
+                on: {
+                  click: () => {
+                    this.remove(params.index);
+                  }
+                }
+              }),
+              h("Button", {
+                props: {
+                  type: "success",
+                  size: "small",
+                  icon: "edit"
+                },
+                on: {
+                  click: () => {
+                    this.edit(params.index);
+                  }
+                }
+              })
+            ]);
+          }
         }
+      ],
+      form: {
+        products: [],
+        sale: []
+      }
+    };
+  },
+  computed: {
+    pageTitle() {
+      let self = this;
+      return "Agregar Venta";
     }
+    // total: function(){
+    //     let total = []
+    //     Object.entries(this.products).forEach(([key, val])=> {
+    //         total.push(val.subTotal);
+    //     });
+    //     return (this.form.total = total.reduce(function(total, num){
+    //         return (total += Number(num))
+    //     }), 0);
+    // }
+  },
+  created() {
+    let self = this;
+    self.get(self.$route.params.id);
+  },
+  methods: {
+    get(id) {
+      if (id == undefined) return;
+
+      let self = this;
+
+      self.loading = true;
+      self.$store.state.services.SaleService.get(id)
+        .then(r => {
+          self.loading = false;
+          self.form.products = r.data.products;
+          self.form.sale = r.data.sale;
+        })
+        .catch(r => {
+          self.$Message.error("Error!");
+        });
+    },
+    save() {
+      let self = this;
+
+      self.loading = true;
+
+      self.$store.state.services.SaleService.add(self.form)
+        .then(r => {
+          self.loading = false;
+          self.$Message.success("Agregado");
+          self.$router.push("/sales");
+        })
+        .catch(r => {
+          self.$Message.error("Error!");
+        });
+    },
+    handleReset(form) {
+      this.$refs[form].resetFields();
+    },
+    remove(index) {
+      this.products.splice(index, 1);
+    },
+    redirect() {
+      this.$router.push("/sales");
+    },
+    pdf() {
+       
+        let self = this;
+
+
+      let doc = new jsPDF();
+      doc.setFontSize(40);
+      doc.text(20, 30, "Factura");
+      doc.line(10, 50, 200, 50);
+      doc.setFontSize(20);
+      doc.text(130, 20, "Codigo: " + self.form.sale.saleId);
+      doc.text(130, 40, "Fecha: " +  self.form.sale.registerDate);
+      doc.setFontSize(20);
+      doc.text(10, 70, "Cliente: " +  self.form.sale.client.name);
+      doc.text(10, 85, "Vendedor: " +  self.form.sale.client.name);
+      doc.text(10, 100, "Correo: " +  self.form.sale.client.email);
+      doc.line(10, 115, 200, 115);
+      doc.setFontSize(30);
+      doc.text(10, 130, "Detalle de venta");
+      doc.line(10, 50, 200, 50);
+
+      doc.setFontSize(20);
+      doc.text(130, 130, "Total : $" + self.form.sale.total);
+      var columns = [
+        "Codigo",
+        "Nombre",
+        "Cantidad",
+        "Precio",
+        "Suplidor"
+      ];
+      var rows = [];
+      self.form.products.forEach(element => {
+        rows.push([
+          element.productCode,
+          element.name,
+          element.quantity,
+          element.pricePerSale,
+          element.supplier
+        ]);
+      });
+      //bug
+    //   doc.autoTable(columns, rows, { margin: { top: 140 } });
+      doc.save(`Factura-${self.form.sale.saleId}.pdf`);
+    }
+  }
+};
 </script>
