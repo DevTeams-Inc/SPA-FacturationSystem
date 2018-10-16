@@ -5,8 +5,8 @@
         <h1>Clientes
             <Icon type="ios-person-outline" /> </h1>
         </Col>
-        <Col span="10" >
-            <Search></Search>
+        <Col span="8">
+        <Search></Search>
         </Col>
         <Col span="2" offset="10">
         <Button @click="redirect('/clients/add')" type="info"><h3>Agregar Cliente <Icon type="ios-person-outline"></Icon></h3></Button>
@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import Search from '@/components/client/Search'
+import Search from '../shared/Search'
 export default {
- components:{Search},
+    components:{Search},
     data() {
         return {
             data:[],
