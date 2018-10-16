@@ -114,13 +114,7 @@ export default {
             })
         },
         show(index) {
-            this.$Modal.info({
-                title: 'Informacion de la Venta',
-                content: `<b>Nombre Cliente</b>：${this.data[index].client.name}
-                <br><b>Nombre Empleado</b>：${this.data[index].user.name}
-                <br><b>Productos</b>：${this.data[index].product}
-                `
-            })
+            this.$router.push(`/sales/${this.data[index].saleId}/detail`)
         },
         remove(index) {
             this.data6.splice(index, 1);

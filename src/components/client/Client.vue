@@ -5,8 +5,15 @@
         <h1>Clientes
             <Icon type="ios-person-outline" /> </h1>
         </Col>
+<<<<<<< HEAD
         <Col span="8">
         <Search></Search>
+=======
+        <Col span="10" >
+        <div class="search">
+        <Input v-model="search" suffix="ios-search" placeholder="Enter text" style="width: auto" />
+        </div>
+>>>>>>> 0ac008523b407870a56cfd9fefa98ef4f53603b0
         </Col>
         <Col span="2" offset="10">
         <Button @click="redirect('/clients/add')" type="info"><h3>Agregar Cliente <Icon type="ios-person-outline"></Icon></h3></Button>
@@ -22,12 +29,17 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import Search from '../shared/Search'
 export default {
     components:{Search},
+=======
+export default {
+>>>>>>> 0ac008523b407870a56cfd9fefa98ef4f53603b0
     data() {
         return {
             data:[],
+            search: '',
             loading: false,
             columns: [{
                     title: 'Nombre',
@@ -188,6 +200,20 @@ export default {
             if (path === undefined) return
             this.$router.push(path)
         }
+    },
+    computed:{
+        search(){
+            return this.data.filter((search) => {
+                search.name.includes(this.search);
+            })
+        }
     }
 }
 </script>
+<style>
+.search{
+        position: relative;
+        top: 34px;
+        left: 30%;
+    }
+</style>

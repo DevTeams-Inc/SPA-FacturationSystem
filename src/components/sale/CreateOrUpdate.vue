@@ -18,6 +18,8 @@
             </FormItem>
         </Col>
 
+        {{ total }}
+
         <Col span="3" offset="1">
             <ClientList @getClientSelected="selectClient"></ClientList>
         </Col>
@@ -31,14 +33,6 @@
         <Col span="5" offset="1">
             <ProductList @getIdSelected="selectProductId"></ProductList>
         </Col>
-
-        <!--
-        <Col span="6" offset="4">
-            <ProductList @getIdSelected="selectProductId"></ProductList>
-        </Col>
-        <Col span="6" offset="1">
-            <EmployeeList @getEmployeeIdSelected="selectEmployeeId"></EmployeeList>
-        </Col>-->
         
         </Row>
 
@@ -52,11 +46,7 @@
         <Col span="5" offset="1">
             <EmployeeList @getEmployeeSelected="selectEmployee"></EmployeeList>
         </Col>
-
-<!--
-        <Col span="5">
-            <Button @click="addProduct" type="primary"><Icon type="ios-box" /> Agregar Producto</Button>
-        </Col>-->
+        
         </Row>
 
         <Row>
@@ -80,16 +70,6 @@
             <Input v-model="form.total" readonly ></Input>
             </FormItem>
         </Col>
-
-       <!-- <Col span="4">
-    
-        <FormItem label="Precio Compra" prop="pricePerPurchase">
-           <InputNumber :max="10000" v-model="form.pricePerPurchase"
-            :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
-            :parser="value => value.replace(/$s?|(,*)/g, '')"></InputNumber>
-        </FormItem>
-
-        </Col>-->
           
         </Row>
 
@@ -236,15 +216,15 @@ import EmployeeList from '@/components/sale/EmployeeList'
               let self = this 
                 return  'Agregar Venta'; 
             },
-            // total: function(){
-            //     let total = []
-            //     Object.entries(this.products).forEach(([key, val])=> {
-            //         total.push(val.subTotal);
-            //     });
-            //     return (this.form.total = total.reduce(function(total, num){
-            //         return (total += Number(num))
-            //     }), 0);
-            // }
+            total: function(){
+                let total = []
+                Object.entries(this.form.products).forEach(([key, val]) => {
+                    total.push(val.subTotal);
+                });
+                return (this.form.sale.total = total.reduce(function(total, num){
+                    return (total += Number(num));
+                }, 0));
+            }
         },
         created() {
             let self = this
@@ -256,9 +236,6 @@ import EmployeeList from '@/components/sale/EmployeeList'
                 self.nameC = name
                 self.form.sale.clientId = clientId
             },
-            addProduct(){
-
-            },
             selectProductId: function(name, productId, quantity, pricePerSale, productCode, type, pricePerPurchase , 
             supplierId) {
                 let self = this
@@ -267,7 +244,6 @@ import EmployeeList from '@/components/sale/EmployeeList'
                 self.form.products.quantity = quantity
                 self.form.products.pricePerSale = pricePerSale
                 self.form.products.supplierId = supplierId
-                console.log(supplierId);
                 function productExist(productId){
                     return self.form.products.some(function(p){
                         return p.productId == productId
@@ -319,29 +295,25 @@ import EmployeeList from '@/components/sale/EmployeeList'
                     self.$Message.error('Error!');
                 });
             },
-            save () {
-                let self = this
-            
-                    
-                        self.loading = true 
-                         
-                            self.$store.state.services.SaleService
-                            .add(self.form)
-                            .then(r => {
-                                self.loading = false;
-                                self.$Message.success('Agregado');
-                                self.$router.push('/sales');
-                            })
-                            .catch(r => {
-                                self.$Message.error('Error!');
-                            });
-                        
+            save() {
+                let self = this            
+                self.loading = true          
+                self.$store.state.services.SaleService
+                .add(self.form)
+                .then(r => {
+                    self.loading = false;
+                    self.$Message.success('Agregado');
+                    self.$router.push('/sales');
+                })
+                .catch(r => {
+                    self.$Message.error('Error!');
+                });             
             },
             handleReset (form) {
                 this.$refs[form].resetFields();
             },
             remove (index) {
-                this.products.splice(index, 1);
+                this.form.products.splice(index, 1);
             }
         }
     }
