@@ -1,9 +1,19 @@
 <template>
+<div>
     <div>
         <Input search enter-button="Search" v-model="search" placeholder="Buscar" >
-                <Button @click="Search(search)" slot="append" icon="ios-search"></Button>
+                <Button @click="Search(search); modalP = true" slot="append" icon="ios-search"></Button>
         </Input>
     </div>
+       <Modal
+        v-model="modalP"
+        title="Clientes"
+        @on-ok="ok"
+        @on-cancel="cancel">
+        <Table border :columns="columns1" :data="data"></Table>
+        </Modal>
+
+        </div>  
 </template>
 
 <script>
@@ -12,8 +22,23 @@ export default {
         return{
             search:'',
             data:[] ,
+            modalP: false,
 
-            
+               columns1: [
+                    {
+                        title: 'Name',
+                        key: 'name'
+                    },
+                    {
+                        title: 'Email',
+                        key: 'email'
+                    },
+                    {
+                        title: 'Address',
+                        key: 'address'
+                    }
+                ],
+                data: []
         }  
     },
     methods:{
@@ -25,26 +50,7 @@ export default {
                 self.data = result.data;
             }).catch((err) => {
             });
-        },
-        
-           handleRender () {
-                this.$Modal.confirm({
-                    render: (h) => {
-                        return h('Input', {
-                            props: {
-                                value: this.value,
-                                autofocus: true,
-                                placeholder: 'Please enter your name...'
-                            },
-                            on: {
-                                input: (val) => {
-                                    this.value = val;
-                                }
-                            }
-                        })
-                    }
-                })
-            }
+        }
     }
 }
 </script>
