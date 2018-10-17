@@ -39,18 +39,12 @@
         </Col>
         </Row>
         <Row>
-        <!-- <Col span="4">
-            <FormItem label="Cantidad" prop="quantity">
-            <InputNumber :max="form.quantity" :min="1" v-model="form.quantityN"></InputNumber>
-        </FormItem> -->
         </Col>
         <Col span="4">
         <!-- El descuento es el itbis es un nuevo cambio
          -->
         <FormItem label="Itbis" prop="discount">
-           <InputNumber :max="18" :min="form.sale.discount" v-model="form.sale.discount"
-            :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
-            :parser="value => value.replace(/$s?|(,*)/g, '')"></InputNumber>
+        <Input v-model="form.sale.discount" readonly ></Input>
         </FormItem>
         </Col>
         <Col span="6">
@@ -162,7 +156,7 @@ export default {
           clientId: 0,
           saleId: 0,
           userId: 0,
-          discount: 18,
+          discount: 0,
           subTotal: 10,
           total: 0
         },
@@ -248,21 +242,19 @@ export default {
         self.$Message.error("Este Producto ya Existe");
       }
       //add total of sale
-      this.form.sale.total += quantity * pricePerSale;
+      let cal = (quantity * pricePerSale);
+      let itbis = (16 * ( (cal) / 100) );
+      this.form.sale.discount += itbis;
+      this.form.sale.total += (cal + itbis);
     },
     selectEmployee: function(name, employeeId) {
       let self = this;
       self.nameE = name;
       self.form.sale.userId = employeeId;
     },
-    totalAll(total) {
-      alert(total);
-    },
     get(id) {
       if (id == undefined) return;
-
       let self = this;
-
       self.loading = true;
       self.$store.state.services.ProductService.get(id)
         .then(r => {
@@ -299,6 +291,17 @@ export default {
       this.$refs[form].resetFields();
     },
     remove(index) {
+        let price = this.form.products[index].pricePerSale;
+        let qyt = this.form.products[index].quantity;
+        let pQ = price * qyt;
+        let itbs = (16 * ( (pQ) / 100));
+        let total = itbs + pQ;
+        this.form.sale.total -= total;
+        this.form.sale.discount -= itbs;
+        if(this.form.products.length == 1){
+          this.form.sale.total = 0;
+          this.form.sale.discount = 0;
+        }
       this.form.products.splice(index, 1);
     }
   }
