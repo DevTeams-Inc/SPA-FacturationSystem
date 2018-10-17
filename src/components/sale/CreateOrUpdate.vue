@@ -50,7 +50,7 @@
         </Row>
 
         <Row>
-        <Col span="4">
+        <!-- <Col span="4">
             <FormItem label="Cantidad" prop="quantity">
             <InputNumber :max="form.quantity" :min="1" v-model="form.quantityN"></InputNumber>
         </FormItem>
@@ -63,7 +63,7 @@
             :parser="value => value.replace(/$s?|(,*)/g, '')"></InputNumber>
         </FormItem>
         
-        </Col>
+        </Col> -->
 
         <Col span="6">
             <FormItem label="Total" prop="total">
