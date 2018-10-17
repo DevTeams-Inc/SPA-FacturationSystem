@@ -31,17 +31,17 @@
         <Row>
 
         <Col span="4">
-        <FormItem label="Descuento" prop="discount">
+        <!-- <FormItem label="Descuento" prop="discount">
            <InputNumber :max="form.sale.discount" v-model="form.sale.discount"
             :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
             :parser="value => value.replace(/$s?|(,*)/g, '')"></InputNumber>
-        </FormItem>
+        </FormItem> -->
         
         </Col>
 
         <Col span="6">
-        <FormItem label="Sub Total" prop="subTotal">
-           <InputNumber :max="form.sale.subTotal" v-model="form.sale.subTotal"
+        <FormItem label="Total" prop="Total">
+           <InputNumber :max="form.sale.total" v-model="form.sale.total"
             :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
             :parser="value => value.replace(/$s?|(,*)/g, '')" readonly></InputNumber>
         </FormItem>
