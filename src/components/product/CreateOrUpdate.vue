@@ -4,7 +4,9 @@
         <Col span="10">
         <h1>
             {{ pageTitle }}
-            <Icon type="ios-box" /></h1>
+            <Icon type="ios-box" />
+            </h1>
+            
         </h1>
         </Col>
     </Row>
