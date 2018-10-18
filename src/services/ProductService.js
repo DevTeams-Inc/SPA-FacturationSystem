@@ -31,6 +31,11 @@ class ProductService {
         let self = this;
         return self.axios.delete(`${self.baseUrl}/${id}`);
     }
+
+    exist(){
+        let self = this;
+        return self.axios.get(`${self.baseUrl}/existence`);
+    }
 }
 
 export default ProductService

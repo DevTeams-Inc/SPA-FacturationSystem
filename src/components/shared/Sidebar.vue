@@ -11,7 +11,10 @@
         <MenuItem name="1-4"><span @click="redirect('/suppliers')"><Icon type="ios-people" /> Suplidores</span></MenuItem>
         <MenuItem name="1-5"><span @click="redirect('/products')"><Icon type="ios-box"></Icon> Productos</span></MenuItem>
         <MenuItem name="1-6"><span @click="redirect('/sales')"><Icon type="bag"></Icon> Ventas</span></MenuItem>
-        <MenuItem name="1-7"><span @click="redirect('/bills')"><Icon type="ios-paper-outline" /> Facturas</span></MenuItem>
+        <MenuItem name="1-7"><span @click="redirect('/#')">
+        <Icon class="i" type="ios-box" />
+          <Badge></Badge> </span></MenuItem>
+        
     </Submenu>
     <Submenu name="2">
         <template slot="title">
@@ -25,17 +28,17 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                
-            }
-        },
-        methods:{
-            redirect(path){
-                if(path === undefined) return
-                this.$router.push(path)
-            }
-        }
+import Badge from "../product/productExist";
+export default {
+  components: { Badge },
+  data() {
+    return {};
+  },
+  methods: {
+    redirect(path) {
+      if (path === undefined) return;
+      this.$router.push(path);
     }
+  }
+};
 </script>
