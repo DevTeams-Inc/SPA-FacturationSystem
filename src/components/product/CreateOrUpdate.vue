@@ -166,6 +166,14 @@ import SupplierList from '@/components/product/SupplierList'
                             .then(r => {
                                 self.loading = false;
                                 self.$Message.success('Agregado');
+                                self.$store.state.services.ProductService
+                                .exist()
+                                .then(e =>{
+                                    alert(e);
+                                })
+                                .catch(e =>{
+                                    alert(e);
+                                })
                                 self.$router.push('/products');
                             })
                             .catch(r => {
