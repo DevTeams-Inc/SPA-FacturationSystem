@@ -1,9 +1,9 @@
 <style scoped>
 </style>
 <template>
-    <Badge :count="qyt">
+    <Badge :count="qyt" class="effect">
         <div class="m">
-        Existencias
+        Inventario
         </div>
     </Badge>
 </template>
@@ -11,19 +11,22 @@
 export default {
   data() {
     return {
+      loading: false,
       qyt: 0,
     };
   },
   created(){
       let self = this
-      self.getAll()
+      self.getSoldOut()
   },
   methods:{
       getSoldOut(){
-          let self = this;
+          let self = this
+          self.loading = true
           self.$store.state.services.ProductService
-          .exist()
+          .getSoldOut()
           .then(e =>{
+              self.loading = false
               self.qyt = e.data.length
           })
           .catch(e =>{

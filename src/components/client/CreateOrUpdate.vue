@@ -134,10 +134,16 @@
                     self.form.phone = r.data.phone
                     self.form.sex = r.data.sex
                     self.form.address = r.data.address
-                    self.$Message.success('Cliente Cargado');
+                    self.$Notice.info({
+                    title: 'Cliente Cargado',
+                    desc: ''
+                    });
                 })
                 .catch(r => {
-                    self.$Message.error('Error!');
+                    self.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                    });
                 });
             },
             save (form) {
@@ -154,10 +160,16 @@
                             self.loading = false;
                             
                             self.$router.push('/clients');
-                            self.$Message.success('Cliente Actualizado');
+                            self.$Notice.success({
+                                title: 'Cliente Actualizado',
+                                desc: ''
+                            });
                         })
                         .catch(r => {
-                            self.$Message.error('Error!');
+                            self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                            });
                         });
 
                         } else {
@@ -166,16 +178,25 @@
                         .add(self.form)
                         .then(r => {
                             self.loading = false;
-                            self.$Message.success('Agregado');
+                            self.$Notice.success({
+                                title: 'Cliente Agregado',
+                                desc: ''
+                            });
                             self.$router.push('/clients');
                         })
                         .catch(r => {
-                            self.$Message.error('Error!');
+                            self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                            });
                         });
                         
                         }
                     } else {
-                        self.$Message.error('Error!');
+                        self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                            });
                     }
                 })
             },

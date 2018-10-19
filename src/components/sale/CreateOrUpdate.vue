@@ -241,7 +241,10 @@ export default {
           supplierId: supplierId
         });
       } else {
-        self.$Message.error("Este Producto ya Existe");
+        self.$Notice.error({
+            title: 'Este Producto ya Existe',
+            desc: ''
+        });
       }
       //add total of sale
       let cal = (quantity * pricePerSale);
@@ -270,10 +273,16 @@ export default {
           self.form.quantityN = r.data.quantity;
           self.form.pricePerPurchase = r.data.pricePerPurchase;
           self.form.discount = r.data.discount;
-          self.$Message.success("Producto Cargado");
+          self.$Notice.success({
+            title: 'Producto Cargado',
+            desc: ''
+        });
         })
         .catch(r => {
-          self.$Message.error("Error!");
+            self.$Notice.error({
+              title: 'Error',
+              desc: ''
+          });
         });
     },
     save() {
@@ -282,11 +291,17 @@ export default {
       self.$store.state.services.SaleService.add(self.form)
         .then(r => {
           self.loading = false;
-          self.$Message.success("Agregado");
+          self.$Notice.success({
+            title: 'Producto Agregado',
+            desc: ''
+        });
           self.$router.push("/sales");
         })
         .catch(r => {
-          self.$Message.error("Error!");
+          self.$Notice.error({
+            title: 'Error',
+            desc: ''
+          });
         });
     },
     handleReset(form) {

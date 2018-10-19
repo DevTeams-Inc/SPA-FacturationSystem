@@ -24,36 +24,68 @@ export default {
         return {
             data: [],
             columns: [{
-                    title: 'Cliente',
-                    key: 'saleId',
-                    render: (h, params) => {
-                        return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'person'
-                                }
-                            }),
-                            h('strong', params.row.client.name)
-                        ]);
-                    }
+                    title: 'COD-Producto',
+                    key: 'productCode',
+                    // render: (h, params) => {
+                    //     return h('div', [
+                    //         h('Icon', {
+                    //             props: {
+                    //                 type: 'ios-box'
+                    //             }
+                    //         }),
+                    //         h('strong', params.row.productCode)
+                    //     ]);
+                    // }
                 },
                 {
-                    title: 'Empleado',
+                    title: 'Producto',
                     key: 'name',
                     render: (h, params) => {
                         return h('div', [
                             h('Icon', {
                                 props: {
-                                    type: 'person'
+                                    type: 'ios-box'
                                 }
                             }),
-                            h('strong', params.row.user.name)
+                            h('strong', params.row.name)
                         ]);
                     }
                 },
                 {
-                    title: 'Fecha Factura',
-                    key: 'registerDate'
+                    title: 'Tipo',
+                    key: 'type',
+                    // render: (h, params) => {
+                    //     return h('div', [
+                    //         h('Icon', {
+                    //             props: {
+                    //                 type: 'ios-box'
+                    //             }
+                    //         }),
+                    //         h('strong', params.row.productCode)
+                    //     ]);
+                    // }
+                },
+                {
+                    title: 'Fecha Registro',
+                    key: 'registerDate',
+                    render: (h, params) => {
+                        let registerD = new Date(params.row.registerDate)
+                        return h('div', [
+                            ,
+                            h('strong', `${registerD.getDate()}/${registerD.getMonth() + 1}/${registerD.getFullYear()}`)
+                        ]);
+                    }
+                },
+                {
+                    title: 'Fecha Editado',
+                    key: 'updatedDate',
+                    render: (h, params) => {
+                        let updatedD = new Date(params.row.updatedDate)
+                        return h('div', [
+                            ,
+                            h('strong', `${updatedD.getDate()}/${updatedD.getMonth() + 1}/${updatedD.getFullYear()}`)
+                        ]);
+                    }
                 },
                 {
                     title: 'Action',
@@ -77,18 +109,18 @@ export default {
                                     }
                                 }
                             }),
-                            h('Button', {
-                                props: {
-                                    type: 'error',
-                                    size: 'small',
-                                    icon: 'close'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.remove(params.index)
-                                    }
-                                }
-                            })
+                            // h('Button', {
+                            //     props: {
+                            //         type: 'error',
+                            //         size: 'small',
+                            //         icon: 'close'
+                            //     },
+                            //     on: {
+                            //         click: () => {
+                            //             this.remove(params.index)
+                            //         }
+                            //     }
+                            // })
                         ]);
                     }
                 }
@@ -96,25 +128,29 @@ export default {
         }
     },
     created() {
-        let sale = this
-        sale.getAll()
+        let soldOut = this
+        soldOut.getSoldOut()
     },
     methods: {
-        getAll(){
-            let sale = this
-            sale.$Loading.start()
-            sale.loading = true
-            sale.$store.state.services.SaleService
-            .getAll().then(p => {
-                sale.$Loading.finish()
-                sale.loading = false
-                sale.data = p.data
+        getSoldOut(){
+            let soldOut = this
+            soldOut.$Loading.start()
+            soldOut.loading = true
+            soldOut.$store.state.services.ProductService
+            .getSoldOut().then(p => {
+                soldOut.$Loading.finish()
+                soldOut.loading = false
+                soldOut.data = p.data
             }).catch(e => {
-                sale.$Loading.error()
+                soldOut.$Loading.error()
             })
         },
         show(index) {
-            this.$router.push(`/sales/${this.data[index].saleId}/detail`)
+            this.$Modal.info({
+                title: 'Información del Producto Agotado',
+                content: `<b>COD-Producto</b>：${this.data[index].productCode}<br><b>Producto</b>：${this.data[index].name}<br><b>Tipo</b>：${this.data[index].type}
+                <br><b>Cantidad</b>：${this.data[index].quantity}`
+            })
         },
         remove(index) {
             this.data6.splice(index, 1);

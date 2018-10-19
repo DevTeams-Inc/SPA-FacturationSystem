@@ -154,7 +154,10 @@ export default {
                 client.getAll()
             })
             .catch(r => {
-                 self.$Message.error('Error!');
+                 client.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                    });
             });
         },
         
@@ -177,7 +180,10 @@ export default {
                 okText: 'Confirmar',
                 onOk: () => {
                     this.delete(this.data[index].clientId),
-                    this.$Message.success('Eliminado!')
+                    this.$Notice.success({
+                    title: 'Cliente Eliminado',
+                    desc: ''
+                    });
                 },
                 cancelText: 'Cancelar',
                 onCancel: () => {

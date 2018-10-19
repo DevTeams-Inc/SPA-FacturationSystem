@@ -23,6 +23,7 @@ export default {
     data() {
         return {
             data: [],
+            loading: false,
             columns: [{
                     title: 'Cliente',
                     key: 'saleId',
@@ -113,11 +114,42 @@ export default {
                 sale.$Loading.error()
             })
         },
+        delete(id){
+            let sale = this
+            sale.loading = true
+            sale.$store.state.services.SaleService
+            .remove(id)
+            .then(s => {
+                sale.loading = false
+                sale.getAll()
+            })
+            .catch(r => {
+                 this.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                    });
+            });
+        },
         show(index) {
             this.$router.push(`/sales/${this.data[index].saleId}/detail`)
         },
         remove(index) {
-            this.data6.splice(index, 1);
+            this.$Modal.confirm({
+                title: 'Eliminar esta Venta',
+                okText: 'Confirmar',
+                onOk: () => {
+                    this.delete(this.data[index].saleId),
+                    
+                    this.$Notice.success({
+                    title: 'Venta Eliminada',
+                    desc: ''
+                    });
+                },
+                cancelText: 'Cancelar',
+                onCancel: () => {
+                    
+                }
+            })
         },
         redirect(path) {
             if (path === undefined) return

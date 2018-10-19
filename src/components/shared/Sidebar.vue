@@ -11,8 +11,7 @@
         <MenuItem name="1-4"><span @click="redirect('/suppliers')"><Icon type="ios-people" /> Suplidores</span></MenuItem>
         <MenuItem name="1-5"><span @click="redirect('/products')"><Icon type="ios-box"></Icon> Productos</span></MenuItem>
         <MenuItem name="1-6"><span @click="redirect('/sales')"><Icon type="bag"></Icon> Ventas</span></MenuItem>
-        <MenuItem name="1-7"><span @click="redirect('/sold-out')">
-        <Icon class="i" type="ios-box" /><Badge></Badge></span></MenuItem>
+        <MenuItem name="1-7"><span @click="redirect('/sold-out')"><Icon class="i" type="ios-box" /><Badge></Badge></span></MenuItem>
         
     </Submenu>
     <Submenu name="2">
