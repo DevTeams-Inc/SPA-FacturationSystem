@@ -31,6 +31,10 @@ class EmployeeService {
         let self = this;
         return self.axios.delete(`${self.baseUrl}/${id}`);
     }
+    search(query){
+        let self = this;
+        return self.axios.get(`${self.baseUrl}/search?query=${query}`);
+    }
 }
 
 export default EmployeeService

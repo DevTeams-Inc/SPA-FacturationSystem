@@ -36,6 +36,10 @@ class ProductService {
         let self = this;
         return self.axios.get(`${self.baseUrl}/sold-out`);
     }
+    search(query){
+        let self = this;
+        return self.axios.get(`${self.baseUrl}/search?query=${query}`);
+    }
 }
 
 export default ProductService
