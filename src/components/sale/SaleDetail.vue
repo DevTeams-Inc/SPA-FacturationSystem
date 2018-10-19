@@ -184,7 +184,10 @@ export default {
           self.form.sale = r.data.sale;
         })
         .catch(r => {
-          self.$Message.error("Error!");
+          self.$Notice.error({
+            title: 'Error',
+            desc: ''
+          });
         });
     },
     save() {
@@ -195,11 +198,17 @@ export default {
       self.$store.state.services.SaleService.add(self.form)
         .then(r => {
           self.loading = false;
-          self.$Message.success("Agregado");
+          self.$Notice.success({
+            title: 'Venta Agregada',
+            desc: ''
+          });
           self.$router.push("/sales");
         })
         .catch(r => {
-          self.$Message.error("Error!");
+          self.$Notice.error({
+            title: 'Error',
+            desc: ''
+         });
         });
     },
     handleReset(form) {
@@ -256,7 +265,10 @@ export default {
         doc.autoTable(columns, rows, { margin: { top: 140 } });
         doc.save(`Factura-${self.form.sale.saleId}.pdf`);
       } catch (e) {
-        alert(e);
+        self.$Notice.success({
+            title: 'Error',
+            desc: ''
+        });
       }
     }
   }

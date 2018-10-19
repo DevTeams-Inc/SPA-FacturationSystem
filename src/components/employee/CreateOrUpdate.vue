@@ -136,10 +136,16 @@
                     self.form.phone = r.data.phone
                     self.form.role = r.data.role
                     self.form.password = r.data.password
-                    self.$Message.success('Empleado Cargado');
+                    self.$Notice.success({
+                        title: 'Empleado Cargado',
+                        desc: ''
+                    });
                 })
-                .catch(r => {
-                    self.$Message.error('Error!');
+                .catch(e => {
+                    self.$Notice.error({
+                        title: 'Error',
+                        desc: ''
+                    });
                 });
             },
             save (form) {
@@ -156,10 +162,16 @@
                                 self.loading = false;
                                 
                                 self.$router.push('/employees');
-                                self.$Message.success('Empleado Actualizado');
+                                self.$Notice.success({
+                                title: 'Empleado Actualizado',
+                                desc: ''
+                                });
                             })
-                            .catch(r => {
-                                self.$Message.error('Error!');
+                            .catch(e => {
+                                self.$Notice.error({
+                                    title: 'Error',
+                                    desc: ''
+                                });
                             });
 
                         } else {
@@ -167,15 +179,24 @@
                             .add(self.form)
                             .then(r => {
                                 self.loading = false;
-                                self.$Message.success('Agregado');
+                                self.$Notice.success({
+                                    title: 'Empleado Agregado',
+                                    desc: ''
+                                });
                                 self.$router.push('/employees');
                             })
-                            .catch(r => {
-                                self.$Message.error('Error!');
+                            .catch(e => {
+                                self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                                });
                             });
                         }
                     } else {
-                        self.$Message.error('Error!');
+                        self.$Notice.error({
+                            title: 'Error',
+                            desc: ''
+                        });
                     }
                 })
             },

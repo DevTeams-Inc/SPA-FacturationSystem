@@ -123,7 +123,6 @@ export default {
                 employee.loading = false
                 employee.data = e.data
                 e.data.forEach(element => {
-                    //Orbis {Arreglando los roles}
                     if(element.role == 1){
                         element.role = 'Admin';
                     }else if(element.role == 2){
@@ -133,7 +132,12 @@ export default {
                     }
                      e.data.role = element.role;
                 });
-            }).catch()
+            }).catch(e => {
+                self.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                });
+            })
         },
         delete(id){
             let employee = this
@@ -144,8 +148,11 @@ export default {
                 employee.loading = false
                 employee.getAll()
             })
-            .catch(r => {
-                 self.$Message.error('Error!');
+            .catch(e => {
+                 self.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                });
             });
         },
         show(index) {
@@ -163,7 +170,10 @@ export default {
                 okText: 'Confirmar',
                 onOk: () => {
                     this.delete(this.data[index].userId),
-                    this.$Message.success('Eliminado!')
+                    self.$Notice.success({
+                        title: 'Empleado Eliminado',
+                        desc: ''
+                    });
                 },
                 cancelText: 'Cancelar',
                 onCancel: () => {

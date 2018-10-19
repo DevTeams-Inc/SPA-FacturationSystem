@@ -28,7 +28,12 @@
             .getAll()
             .then(s => {
                 supplier.data = s.data
-            }).catch()
+            }).catch(e => {
+                supplier.$Notice.success({
+                    title: 'Error',
+                    desc: ''
+                });
+            })
         },
         getId(value){
             let self = this

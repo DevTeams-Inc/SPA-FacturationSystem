@@ -100,10 +100,16 @@
                     self.form.dni = r.data.dni
                     self.form.phone = r.data.phone
                     self.form.address = r.data.address
-                    self.$Message.success('Suplidor Cargado');
+                    self.$Notice.success({
+                        title: 'Suplidor Cargado',
+                        desc: ''
+                    });
                 })
                 .catch(r => {
-                    self.$Message.error('Error!');
+                    self.$Notice.success({
+                        title: 'Error',
+                        desc: ''
+                    });
                 });
             },
             save (form) {
@@ -118,12 +124,17 @@
                         .update(self.form)
                         .then(r => {
                             self.loading = false;
-                            
                             self.$router.push('/suppliers');
-                            self.$Message.success('Suplidor Actualizado');
+                            self.$Notice.success({
+                                title: 'Suplidor Actualizado',
+                                desc: ''
+                            });
                         })
-                        .catch(r => {
-                            self.$Message.error('Error!');
+                        .catch(e => {
+                            self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                            }); 
                         });
 
                         } else {
@@ -132,16 +143,25 @@
                         .add(self.form)
                         .then(r => {
                             self.loading = false;
-                            self.$Message.success('Agregado');
+                            self.$Notice.success({
+                                title: 'Suplidor Agregado',
+                                desc: ''
+                            });
                             self.$router.push('/suppliers');
                         })
-                        .catch(r => {
-                            self.$Message.error('Error!');
+                        .catch(e => {
+                            self.$Notice.error({
+                                title: 'Error',
+                                desc: ''
+                            });
                         });
                         
                         }
                     } else {
-                        self.$Message.error('Error!');
+                        self.$Notice.error({
+                            title: 'Error',
+                            desc: ''
+                        });
                     }
                 })
             },

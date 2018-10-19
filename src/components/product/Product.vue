@@ -131,7 +131,10 @@ export default {
                 product.getAll()
             })
             .catch(r => {
-                 self.$Message.error('Error!');
+                 self.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                });
             });
         },
         show(index) {
@@ -147,7 +150,10 @@ export default {
                 okText: 'Confirmar',
                 onOk: () => {
                     this.delete(this.data[index].productId),
-                    this.$Message.success('Eliminado!')
+                    this.$Notice.success({
+                        title: 'Producto Eliminado',
+                        desc: ''
+                    });
                 },
                 cancelText: 'Cancelar',
                 onCancel: () => {

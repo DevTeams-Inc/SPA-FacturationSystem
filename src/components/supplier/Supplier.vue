@@ -122,7 +122,12 @@ export default {
             .then(s => {
                 supplier.loading = false
                 supplier.data = s.data
-            }).catch()
+            }).catch(e => {
+                supplier.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                });
+            })
         },
         delete(id){
             let supplier = this
@@ -134,7 +139,10 @@ export default {
                 supplier.getAll()
             })
             .catch(r => {
-                 self.$Message.error('Error!');
+                 supplier.$Notice.error({
+                    title: 'Error',
+                    desc: ''
+                });
             });
         },
         edit(index){
@@ -153,7 +161,10 @@ export default {
                 okText: 'Confirmar',
                 onOk: () => {
                     this.delete(this.data[index].supplierId),
-                    this.$Message.success('Eliminado!')
+                    this.$Notice.success({
+                        title: 'Suplidor Eliminado',
+                        desc: ''
+                    });
                 },
                 cancelText: 'Cancelar',
                 onCancel: () => {

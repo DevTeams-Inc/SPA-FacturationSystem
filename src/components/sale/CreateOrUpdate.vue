@@ -278,7 +278,7 @@ export default {
             desc: ''
         });
         })
-        .catch(r => {
+        .catch(e => {
             self.$Notice.error({
               title: 'Error',
               desc: ''
@@ -297,7 +297,7 @@ export default {
         });
           self.$router.push("/sales");
         })
-        .catch(r => {
+        .catch(e => {
           self.$Notice.error({
             title: 'Error',
             desc: ''
