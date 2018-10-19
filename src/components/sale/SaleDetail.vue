@@ -88,17 +88,17 @@ export default {
           title: "Precio",
           key: "pricePerSale"
         },
-        {
-          title: "SubTotal",
-          key: "subTotal",
-          render: (h, params) => {
-              let subT = (this.form.sale.subTotal)
-              return h('div', [
-                  ,
-                  h('strong', `${subT}`)
-              ]);
-          }
-        },
+        // {
+        //   title: "SubTotal",
+        //   key: "subTotal",
+        //   render: (h, params) => {
+        //       let subT = (this.form.sale.subTotal)
+        //       return h('div', [
+        //           ,
+        //           h('strong', `${subT}`)
+        //       ]);
+        //   }
+        // },
         {
           title: "Opciones",
           key: "action",

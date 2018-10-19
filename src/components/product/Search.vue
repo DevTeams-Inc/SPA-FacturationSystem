@@ -27,24 +27,24 @@ export default {
                columns1: [
                     {
                         title: 'Nombre',
-                        key: 'name'
+                        key: 'name',
+                        width: 115,
                     },
                       {
-                        title: 'Cedula',
-                        key: 'dni'
-                    },
-                    {
-                        title: 'Email',
-                        key: 'email'
-                    },
-                    {
-                        title: 'Dirección',
-                        key: 'address'
-                    },
-                    {
-                    title: 'Telefono',
-                    key: 'phone'
+                    title: 'Tipo',
+                    key: 'type',
+                    width: 115,
                 },
+                {
+                    title: 'Cantidad',
+                    key: 'quantity',
+                    width: 115,
+                },
+                {
+                    title: 'Precio Compra',
+                    key: 'pricePerSale',
+                    width: 125,
+                }, 
                 ],
                 data: []
         }  

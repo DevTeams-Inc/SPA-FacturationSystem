@@ -34,10 +34,6 @@ export default {
                         key: 'dni'
                     },
                     {
-                        title: 'Email',
-                        key: 'email'
-                    },
-                    {
                         title: 'Dirección',
                         key: 'address'
                     },
