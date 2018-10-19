@@ -1,11 +1,14 @@
 <template>
 <div>
-    <Row>
-        <Col span="10">
+    <Row :gutter="200">
+        <Col span="8">
         <h1>Productos
             <Icon type="ios-box" /></h1>
         </Col>
-        <Col span="2" offset="9">
+          <Col span="8">
+        <Search></Search>
+        </Col>
+        <Col span="8" >
         <Button @click="redirect('/products/add')" type="info"><h3>Agregar Producto <Icon type="ios-box"></Icon></h3></Button>
         </Col>
     </Row>
@@ -18,9 +21,10 @@
 </div>
 </template>
 <script>
-
+import Search from '../product/Search'
 export default {
-    data() {
+    components:{Search},
+        data() {
         return {
             data:[],
             loading: false,

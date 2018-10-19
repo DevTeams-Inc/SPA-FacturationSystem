@@ -1,11 +1,14 @@
 <template>
 <div>
-    <Row>
-        <Col span="10">
+    <Row :gutter="196">
+        <Col span="8">
         <h1>Empleados
             <Icon type="ios-person-outline" /> </h1>
         </Col>
-        <Col span="2" offset="9">
+         <Col span="8">
+        <Search></Search>
+        </Col>
+        <Col span="8">
         <Button @click="redirect('/employees/add')" type="info"><h3>Agregar Empleado <Icon type="person"></Icon></h3></Button>
         </Col>
     </Row>
@@ -19,7 +22,9 @@
 </template>
 
 <script>
+import Search from '../employee/Search'
 export default {
+    components: {Search},
     data() {
         return {
             data:[],
@@ -29,11 +34,11 @@ export default {
                     key: 'name',
                     render: (h, params) => {
                         return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'person'
-                                }
-                            }),
+                            // h('Icon', {
+                            //     props: {
+                            //         type: 'person'
+                            //     }
+                            // }),
                             h('strong', params.row.name)
                         ]);
                     }
