@@ -1,7 +1,9 @@
 <template>
 <Header>
     <Menu mode="horizontal" theme="dark" active-name="1">
-        <div class="layout-logo"></div>
+        <div class="layout-logo">
+            <h1 class="logo">Logo</h1>
+        </div>
         <div class="layout-nav">
             <Submenu name="1">
                 <template slot="title">
@@ -38,3 +40,4 @@ export default {
   }
 };
 </script>
+

@@ -59,14 +59,15 @@ export default {
     overflow: hidden;
 } */
 .layout-logo{
-    width: 300px;
-    height: 35px;
+    width: 100px;
+    height: 38px;
     background: #5b6270;
     border-radius: 3px;
     float: left;
     position: relative;
     top: 15px;
     left: 20px;
+
 }
 .layout-nav{
     width: 430px;
@@ -75,6 +76,13 @@ export default {
 }
 .layout-footer-center{
     text-align: center;
+}
+.logo{
+    color: aliceblue;
+    position: relative;
+    text-align: center;
+    bottom: 10px;
+    font-family: sans-serif;
 }
 
 </style>
