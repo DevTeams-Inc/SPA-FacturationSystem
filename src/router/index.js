@@ -20,6 +20,8 @@ import SaleDetail from '../components/sale/SaleDetail'
 
 import Bill from '../components/bill/Bill'
 
+import SoldOut from '../components/product/SoldOut'
+
 Vue.use(Router)
 
 export default new Router({
@@ -113,6 +115,11 @@ export default new Router({
       path: '/bills',
       name: 'Facturas',
       component: Bill
+    },
+    {
+      path: '/sold-out',
+      name: 'Productos Agotados',
+      component: SoldOut
     }
   ]
 })

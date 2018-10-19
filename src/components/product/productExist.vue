@@ -1,4 +1,4 @@
-    <style scoped>
+<style scoped>
 </style>
 <template>
     <Badge :count="qyt">
@@ -15,11 +15,11 @@ export default {
     };
   },
   created(){
-      let self = this;
-      self.get();
+      let self = this
+      self.getAll()
   },
   methods:{
-      get(){
+      getSoldOut(){
           let self = this;
           self.$store.state.services.ProductService
           .exist()

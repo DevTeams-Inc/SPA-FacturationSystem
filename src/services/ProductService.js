@@ -32,9 +32,9 @@ class ProductService {
         return self.axios.delete(`${self.baseUrl}/${id}`);
     }
 
-    exist(){
+    getSoldOut(){
         let self = this;
-        return self.axios.get(`${self.baseUrl}/existence`);
+        return self.axios.get(`${self.baseUrl}/sold-out`);
     }
 }
 
