@@ -7,7 +7,7 @@
     </div>
        <Modal
         v-model="modalP"
-        title="Clientes"
+        title="Suplidores"
         @on-ok="ok"
         @on-cancel="cancel">
         <Table border :columns="columns1" :data="data"></Table>
@@ -29,6 +29,10 @@ export default {
                         title: 'Nombre',
                         key: 'name'
                     },
+                      {
+                        title: 'Cedula',
+                        key: 'dni'
+                    },
                     {
                         title: 'Email',
                         key: 'email'
@@ -36,7 +40,11 @@ export default {
                     {
                         title: 'Dirección',
                         key: 'address'
-                    }
+                    },
+                    {
+                    title: 'Telefono',
+                    key: 'phone'
+                },
                 ],
                 data: []
         }  
@@ -44,7 +52,7 @@ export default {
     methods:{
         Search(value){
             let self = this;
-            self.$store.state.services.ClientService
+            self.$store.state.services.SupplierService
             .search(value)
             .then((result) => {
                 self.data = result.data;

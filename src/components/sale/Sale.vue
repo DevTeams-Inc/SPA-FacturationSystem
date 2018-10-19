@@ -29,12 +29,12 @@ export default {
                     key: 'saleId',
                     render: (h, params) => {
                         return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'person'
-                                }
-                            }),
-                            h('strong', params.row.client.name)
+                            // h('Icon', {
+                            //     props: {
+                            //         type: 'person'
+                            //     }
+                            // }),
+                            h('normal', params.row.client.name)
                         ]);
                     }
                 },
@@ -43,12 +43,12 @@ export default {
                     key: 'name',
                     render: (h, params) => {
                         return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'person'
-                                }
-                            }),
-                            h('strong', params.row.user.name)
+                            // h('Icon', {
+                            //     props: {
+                            //         type: 'person'
+                            //     }
+                            // }),
+                            h('normal', params.row.user.name)
                         ]);
                     }
                 },

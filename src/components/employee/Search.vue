@@ -7,7 +7,7 @@
     </div>
        <Modal
         v-model="modalP"
-        title="Clientes"
+        title="Empleados"
         @on-ok="ok"
         @on-cancel="cancel">
         <Table border :columns="columns1" :data="data"></Table>
@@ -29,6 +29,10 @@ export default {
                         title: 'Nombre',
                         key: 'name'
                     },
+                      {
+                        title: 'Nombre Usuario',
+                        key: 'userName'
+                    },
                     {
                         title: 'Email',
                         key: 'email'
@@ -44,7 +48,7 @@ export default {
     methods:{
         Search(value){
             let self = this;
-            self.$store.state.services.ClientService
+            self.$store.state.services.EmployeeService
             .search(value)
             .then((result) => {
                 self.data = result.data;

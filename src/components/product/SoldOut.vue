@@ -42,11 +42,11 @@ export default {
                     key: 'name',
                     render: (h, params) => {
                         return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'ios-box'
-                                }
-                            }),
+                            // h('Icon', {
+                            //     props: {
+                            //         type: 'ios-box'
+                            //     }
+                            // }),
                             h('strong', params.row.name)
                         ]);
                     }

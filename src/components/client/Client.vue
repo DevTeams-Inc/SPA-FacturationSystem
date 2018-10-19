@@ -1,14 +1,14 @@
 <template>
 <div>
-    <Row>
-        <Col span="10">
+    <Row :gutter="220">
+        <Col span="8">
         <h1>Clientes
             <Icon type="ios-person-outline" /> </h1>
         </Col>
         <Col span="8">
         <Search></Search>
         </Col>
-        <Col span="2" offset="10">
+        <Col span="8">
         <Button @click="redirect('/clients/add')" type="info"><h3>Agregar Cliente <Icon type="ios-person-outline"></Icon></h3></Button>
         </Col>
     </Row>
@@ -35,11 +35,11 @@ export default {
                     key: 'name',
                     render: (h, params) => {
                         return h('div', [
-                            h('Icon', {
-                                props: {
-                                    type: 'person'
-                                }
-                            }),
+                            // h('Icon', {
+                            //     props: {
+                            //         type: 'person'
+                            //     }
+                            // }),
                             h('strong', params.row.name)
                         ]);
                     }

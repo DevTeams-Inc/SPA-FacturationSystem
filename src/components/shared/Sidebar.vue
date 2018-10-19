@@ -14,14 +14,14 @@
         <MenuItem name="1-7"><span @click="redirect('/sold-out')"><Icon class="i" type="ios-box" /><Badge></Badge></span></MenuItem>
         
     </Submenu>
-    <Submenu name="2">
+    <!-- <Submenu name="2">
         <template slot="title">
             <Icon type="gear-a"></Icon>
             Configuración
         </template>
         <MenuItem name="2-1"><Icon type="ios-contact-outline" /> Perfil</MenuItem>
         <MenuItem name="2-2"><Icon type="log-out"></Icon> Cerrar Sesión</MenuItem>
-    </Submenu>
+    </Submenu> -->
 </Menu>
 </template>
 
