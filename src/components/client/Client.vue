@@ -50,7 +50,8 @@ export default {
                 },
                 {
                     title: 'Email',
-                    key: 'email'
+                    key: 'email',
+                    width: 115,
                 },
                 {
                     title: 'Telefono',
@@ -62,11 +63,20 @@ export default {
                 },
                 {
                     title: 'Address',
-                    key: 'address'
+                    key: 'address',
+                    width: 115,
                 },
                 {
                     title: 'Fecha Registro',
-                    key: 'registerDate'
+                    key: 'registerDate',
+                    width: 125,
+                    render: (h, params) => {
+                        let registerD = new Date(params.row.registerDate)
+                        return h('div', [
+                            ,
+                            h('strong', `${registerD.getDate()}/${registerD.getMonth() + 1}/${registerD.getFullYear()}`)
+                        ]);
+                    }
                 },
                 {
                     title: 'Opciones',

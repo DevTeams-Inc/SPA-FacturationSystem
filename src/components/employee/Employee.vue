@@ -52,7 +52,14 @@ export default {
                 },
                 {
                     title: 'Fecha Registro',
-                    key: 'registerDate'
+                    key: 'registerDate',
+                    render: (h, params) => {
+                        let registerD = new Date(params.row.registerDate)
+                        return h('div', [
+                            ,
+                            h('strong', `${registerD.getDate()}/${registerD.getMonth() + 1}/${registerD.getFullYear()}`)
+                        ]);
+                    }
                 },
                 {
                     title: 'Opciones',

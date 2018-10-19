@@ -2,7 +2,7 @@
 <div>
     <Row>
         <Col span="10">
-        <h1>Productos Agotados
+        <h1>Inventario
             <Icon type="ios-box" /></h1>
         </Col>
         <!-- <Col span="2" offset="9">

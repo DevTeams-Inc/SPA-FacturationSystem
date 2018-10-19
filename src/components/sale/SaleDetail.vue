@@ -90,7 +90,14 @@ export default {
         },
         {
           title: "SubTotal",
-          key: "subTotal"
+          key: "subTotal",
+          render: (h, params) => {
+              let subT = (this.form.sale.subTotal)
+              return h('div', [
+                  ,
+                  h('strong', `${subT}`)
+              ]);
+          }
         },
         {
           title: "Opciones",

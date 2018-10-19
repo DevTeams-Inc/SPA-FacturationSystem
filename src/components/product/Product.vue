@@ -34,7 +34,8 @@ export default {
                 },
                 {
                     title: 'Tipo',
-                    key: 'type'
+                    key: 'type',
+                    width: 115,
                 },
                 {
                     title: 'Cantidad',
@@ -42,15 +43,25 @@ export default {
                 },
                 {
                     title: 'Precio Compra',
-                    key: 'pricePerSale'
+                    key: 'pricePerSale',
+                    width: 125,
                 },
                 {
                     title: 'Precio Venta',
-                    key: 'pricePerPurchase'
+                    key: 'pricePerPurchase',
+                    width: 125,
                 },
                 {
                     title: 'Fecha Registro',
-                    key: 'registerDate'
+                    key: 'registerDate',
+                    width: 125,
+                    render: (h, params) => {
+                        let registerD = new Date(params.row.registerDate)
+                        return h('div', [
+                            ,
+                            h('strong', `${registerD.getDate()}/${registerD.getMonth() + 1}/${registerD.getFullYear()}`)
+                        ]);
+                    }
                 },
                 {
                     title: 'Opciones',

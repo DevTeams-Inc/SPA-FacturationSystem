@@ -75,12 +75,12 @@
         <Col span="8" offset="3">
         <Card style="width:260px">
             <div style="text-align:center">
-                <Button type="text" @click="redirect('/bills')">
+                <Button type="text" @click="redirect('/sold-out')">
                     
-                        <img src="../assets/images/bill.png" height="64px" width="64px">
+                        <img src="../assets/images/delivery-cart.png" height="64px" width="64px">
                     
                     <br>
-                    <h3>Facturas</h3>
+                    <h3>Inventario</h3>
                 </Button>
             </div>
         </Card>
