@@ -8,36 +8,43 @@
     </Badge>
 </template>
 <script>
+import { EventBus } from "@/event-bus.js";
+
 export default {
   data() {
     return {
       loading: false,
-      qyt: 0,
+      qyt: 0
     };
   },
-  created(){
-      let self = this
-      self.getSoldOut()
+  created() {
+    let self = this;
+    self.getSoldOut();
+    EventBus.$on("get", () => {
+      self.getSoldOut();
+      self.$Notice.warning({
+        title: "se agoto",
+        desc: "dasdsdsadasdsadsasdaasdsad"
+      });
+    });
   },
-  methods:{
-      getSoldOut(){
-          let self = this
-          self.loading = true
-          self.$store.state.services.ProductService
-          .getSoldOut()
-          .then(e =>{
-              self.loading = false
-              self.qyt = e.data.length
-          })
-          .catch(e =>{
-          })
-      }
+  methods: {    
+    getSoldOut() {
+      let self = this;
+      self.loading = true;
+      self.$store.state.services.ProductService.getSoldOut()
+        .then(e => {
+          self.loading = false;
+          self.qyt = e.data.length;
+        })
+        .catch(e => {});
+    }
   }
 };
 </script>
 <style>
-.m{
-    margin:8px;
+.m {
+  margin: 8px;
 }
 </style>
 

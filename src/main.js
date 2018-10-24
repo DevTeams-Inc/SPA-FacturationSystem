@@ -8,6 +8,7 @@ import 'iview/dist/styles/iview.css'
 import store from './store/index'
 import locale from 'iview/dist/locale/es-ES'
 
+
 Vue.config.productionTip = false
 Vue.use(IView, { locale })
 

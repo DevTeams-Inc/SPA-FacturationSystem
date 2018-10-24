@@ -70,6 +70,8 @@
     </div>
 </template>
 <script>
+import { EventBus } from '@/event-bus.js';
+
 import ClientList from "@/components/sale/ClientList";
 import ProductList from "@/components/sale/ProductList";
 import EmployeeList from "@/components/sale/EmployeeList";
@@ -292,9 +294,10 @@ export default {
         .then(r => {
           self.loading = false;
           self.$Notice.success({
-            title: 'Producto Agregado',
+            title: 'Venta Realizada',
             desc: ''
         });
+          EventBus.$emit('get')
           self.$router.push("/sales");
         })
         .catch(e => {
