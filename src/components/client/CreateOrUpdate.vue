@@ -46,18 +46,22 @@
             </RadioGroup>
             </FormItem>
         </Col>
-
-        </Row>
-
         <Col span="8">
         <FormItem label="Direccion" prop="address">
             <Input v-model="form.address" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Ingresa la direccion"></Input>
         </FormItem>
-        <FormItem>
+        </Col>
+        </Row>
+
+        <Row class="button">
+          <Col span="12" offset="6">
+             <FormItem >
             <Button type="primary" @click="save('form')">Guardar</Button>
             <Button @click="handleReset('form')" style="margin-left: 8px">Limpiar Formulario</Button>
         </FormItem>
-        </Col>
+          </Col>
+        </Row>  
+       
     </Form>
     </div>
     
@@ -81,14 +85,14 @@ export default {
         name: [
           {
             required: true,
-            message: "Debes ingresar un Nombre",
+            message: "Debes ingresar un nombre",
             trigger: "blur"
           }
         ],
         lastName: [
           {
             required: true,
-            message: "Debes ingresar un Apellido",
+            message: "Debes ingresar un apellido",
             trigger: "blur"
           }
         ],
@@ -107,14 +111,14 @@ export default {
         phone: [
           {
             required: true,
-            message: "Debes ingresar el Telefono",
+            message: "Debes ingresar el telefono",
             trigger: "blur"
           }
         ],
         dni: [
           {
             required: true,
-            message: "Debes ingresar la Cedula",
+            message: "Debes ingresar la cedula",
             trigger: "blur"
           }
         ],
@@ -170,10 +174,10 @@ export default {
           self.form.phone = r.data.phone;
           self.form.sex = r.data.sex;
           self.form.address = r.data.address;
-          self.$Notice.info({
-            title: "Cliente Cargado",
-            desc: ""
-          });
+          // self.$Notice.info({
+          //   title: "Cliente Cargado",
+          //   desc: ""
+          // });
         })
         .catch(r => {
           self.$Notice.error({
@@ -223,9 +227,13 @@ export default {
               });
           }
         } else {
+          self.$Notice.config({
+            top: 70,
+            duration: 2.6
+          });
           self.$Notice.error({
             title: "Error",
-            desc: ""
+            desc: "Revisar los campos."
           });
         }
       });
@@ -236,3 +244,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.button{
+ padding: 5%;
+}
+</style>
+

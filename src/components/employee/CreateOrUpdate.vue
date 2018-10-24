@@ -21,12 +21,12 @@
             <Input v-model="form.userName" placeholder="Ingresa el nombre de usuario"></Input>
         </FormItem>
         </Col>
-        <Col span="7">
-        <FormItem label="E-email" prop="email">
-            <Input v-model="form.email" placeholder="Ingresa el Email"></Input>
+       
+<Col span="7">
+        <FormItem label="Contraseña" prop="password">
+            <Input type="password" v-model="form.password"></Input>
         </FormItem>
         </Col>
-
         <Col span="7">
         <FormItem label="Telefono" prop="phone">
             <Input v-model="form.phone" placeholder="Ingresa el Telefono"></Input>
@@ -42,26 +42,34 @@
             </Select>
         </FormItem>
         </Col>
-
-        <Col span="7">
-        <FormItem label="Contraseña" prop="password">
-            <Input type="password" v-model="form.password"></Input>
-        </FormItem>
-        </Col>
-
-        <Col span="7">
+ <Col span="7">
         <FormItem label="Repite la Contraseña" prop="passwdCheck">
             <Input type="password" v-model="form.passwdCheck"></Input>
         </FormItem>
         </Col>
-
-        </Row>
-        
-        <FormItem>
-            <Button type="primary" @click="save('form')">Guardar</Button>
-            <Button @click="handleReset('form')" style="margin-left: 8px">Limpiar Formulario</Button>
+         <Col span="7">
+        <FormItem label="E-email" prop="email">
+            <Input v-model="form.email" placeholder="Ingresa el Email"></Input>
         </FormItem>
+        </Col>
+
+       
+
+        </Row >
+        <Row class="button">
+              <Col span="12" offset="6">
+               <FormItem>
+                <Button type="primary" @click="save('form')">Guardar</Button>
+                <Button @click="handleReset('form')" style="margin-left: 8px">Limpiar Formulario</Button>
+            </FormItem>
+              </Col>
+           
+            
         
+        </Row>
+            
+        
+       
     </Form>
     </div>
     
@@ -82,26 +90,26 @@
                 },
                 ruleValidate: {
                     name: [
-                        { required: true, message: 'Debes ingresar un Nombre', trigger: 'blur' }
+                        { required: true, message: 'Debes ingresar un nombre', trigger: 'blur' }
                     ],
                     userName: [
-                        { required: true, message: 'Debes ingresar un Apellido', trigger: 'blur' }
+                        { required: true, message: 'Debes ingresar un nombre de usuario', trigger: 'blur' }
                     ],
                     email: [
                         { required: true, message: 'Debes ingresar un email', trigger: 'blur' },
                         { type: 'email', message: 'Formato de email incorrecto', trigger: 'blur' }
                     ],
                     phone: [
-                        { required: true, message: 'Debes ingresar el Telefono', trigger: 'blur' }
+                        { required: true, message: 'Debes ingresar el telefono', trigger: 'blur' }
                     ],
                     password: [
-                        { required: true, message: 'Debes ingresar la Cedula', trigger: 'blur' }
+                        { required: true, message: 'Debes ingresar la contraseña', trigger: 'blur' }
                     ],
                     role: [
-                        { required: true, message: 'Por favor selecciona un sexo', trigger: 'change' }
+                        { required: true, message: 'Debes selecciona un rol', trigger: 'change' }
                     ],
                     passwdCheck: [
-                        { required: true, message: 'Debes ingresar la direccion', trigger: 'blur' }
+                        { required: true, message: 'Debes repertir la contraseña', trigger: 'blur' }
                         
                     ]
                 }
@@ -136,14 +144,14 @@
                     self.form.phone = r.data.phone
                     self.form.role = r.data.role
                     self.form.password = r.data.password
-                    self.$Notice.success({
-                        title: 'Empleado Cargado',
-                        desc: ''
-                    });
+                    // self.$Notice.success({
+                    //     title: 'Empleado Cargado',
+                    //     desc: ''
+                    // });
                 })
                 .catch(e => {
                     self.$Notice.error({
-                        title: 'Error',
+                        title: 'error.',
                         desc: ''
                     });
                 });
@@ -169,7 +177,7 @@
                             })
                             .catch(e => {
                                 self.$Notice.error({
-                                    title: 'Error',
+                                    title: 'error.',
                                     desc: ''
                                 });
                             });
@@ -187,15 +195,19 @@
                             })
                             .catch(e => {
                                 self.$Notice.error({
-                                title: 'Error',
+                                title: 'error.',
                                 desc: ''
                                 });
                             });
                         }
                     } else {
+                        self.$Notice.config({
+                        top: 70,
+                        duration: 2.6
+                    });
                         self.$Notice.error({
                             title: 'Error',
-                            desc: ''
+                            desc: 'Revisar los campos.'
                         });
                     }
                 })

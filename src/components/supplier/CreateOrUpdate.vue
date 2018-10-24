@@ -28,18 +28,19 @@
             <Input v-model="form.phone" placeholder="Ingresa el Telefono"></Input>
         </FormItem>
         </Col>
-
-        </Row>
-
-        <Col span="8">
+  <Col span="8">
         <FormItem label="Direccion" prop="address">
             <Input v-model="form.address" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Ingresa la direccion"></Input>
         </FormItem>
+        </Col>
+
+        </Row>
+
+      
         <FormItem>
             <Button type="primary" @click="save('form')">Guardar</Button>
             <Button @click="handleReset('form')" style="margin-left: 8px">Limpiar Formulario</Button>
         </FormItem>
-        </Col>
     </Form>
     </div>
     
@@ -158,9 +159,13 @@
                         
                         }
                     } else {
+                         self.$Notice.config({
+                        top: 70,
+                        duration: 2.6
+                    });
                         self.$Notice.error({
                             title: 'Error',
-                            desc: ''
+                            desc: 'Revisar los campos.'
                         });
                     }
                 })

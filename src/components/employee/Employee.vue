@@ -180,9 +180,10 @@ export default {
                 title: 'Eliminar Empleado',
                 content: `¿Deseas Eliminar a <b>${this.data[index].name}</b>?`,
                 okText: 'Confirmar',
+                
                 onOk: () => {
                     this.delete(this.data[index].userId),
-                    self.$Notice.success({
+                    this.$Notice.success({
                         title: 'Empleado Eliminado',
                         desc: ''
                     });
