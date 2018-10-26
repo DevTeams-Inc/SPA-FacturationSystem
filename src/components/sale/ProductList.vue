@@ -20,6 +20,7 @@
                 modalP: false,
                 data: [],
                 products: '',
+                q: '',
                 loading: false,
                 columns: [{
                     title: 'Name',
@@ -34,12 +35,17 @@
                                 props: {
                                     type: 'number',
                                     min: 1,
-                                    max: this.data[params.index].quantity,
+                                    max: parseInt(this.q),
                                     value: this.data[params.index].quantity
                                 },
                                 style: {
                                     width: '40%'
                                 },
+                                on: {
+                                    input: (value) => {
+                                    this.q = value
+                                    }
+                                }
                             }), 
                         ]);
                     }
@@ -98,7 +104,7 @@
             self.$emit('getIdSelected', 
             self.data[index].name, 
             self.data[index].productId, 
-            self.data[index].quantity,
+            self.q,
             self.data[index].pricePerSale,
             self.data[index].productCode,
             self.data[index].type,

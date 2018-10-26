@@ -1,7 +1,7 @@
 <template>
 <Col span="4">
-          <FormItem label="Suplidor" prop="supplier">
-            <Select v-model="suppliers" style="width:200px">
+          <FormItem label="Suplidor" prop="suppliers">
+            <Select v-model="formValidate.suppliers" style="width:200px" placeholder="Selecciona un suplidor">
                 <Option :change="getId(suppliers)" v-for="item in data" :value="item.supplierId" :key="item.supplierId">{{ item.name }}</Option>
             </Select>
             </FormItem>
@@ -13,7 +13,16 @@
         data(){
             return {
                 data: [],
-                suppliers: ''
+                formValidate: {
+                    suppliers: '',
+                },
+                ruleValidate: {
+                    suppliers: [{
+                        required: true,
+                        message: "Debes un suplidor",
+                        trigger: 'change'
+                    }]
+                }
             }
         },
     created() {
