@@ -106,21 +106,7 @@ export default {
           align: "center",
           render: (h, params) => {
             return h("div", [
-              h("Button", {
-                props: {
-                  type: "primary",
-                  size: "small",
-                  icon: "search"
-                },
-                style: {
-                  marginRight: "5px"
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index);
-                  }
-                }
-              }),
+
               h("Button", {
                 props: {
                   type: "error",
@@ -136,18 +122,6 @@ export default {
                   }
                 }
               }),
-              h("Button", {
-                props: {
-                  type: "success",
-                  size: "small",
-                  icon: "edit"
-                },
-                on: {
-                  click: () => {
-                    this.edit(params.index);
-                  }
-                }
-              })
             ]);
           }
         }
@@ -212,10 +186,6 @@ export default {
           self.$router.push("/sales");
         })
         .catch(r => {
-          self.$Notice.error({
-            title: 'Error',
-            desc: ''
-         });
         });
     },
     handleReset(form) {
