@@ -218,3 +218,8 @@
         }
     }
 </script>
+<style>
+.button{
+ padding: 5%;
+}
+</style>

@@ -62,11 +62,13 @@
         <br>
         <FormItem>
         <Col span="6" offset="6">
+            <Button type="error" @click="redirect()" icon="ios-arrow-back">Back</Button>
             <Button type="primary" @click="save()">Agregar Venta</Button>
         </Col>    
         </FormItem>
         </Row>
     </Form>
+    
     </div>
 </template>
 <script>
@@ -107,21 +109,6 @@ export default {
             return h("div", [
               h("Button", {
                 props: {
-                  type: "primary",
-                  size: "small",
-                  icon: "search"
-                },
-                style: {
-                  marginRight: "5px"
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index);
-                  }
-                }
-              }),
-              h("Button", {
-                props: {
                   type: "error",
                   size: "small",
                   icon: "close"
@@ -135,18 +122,6 @@ export default {
                   }
                 }
               }),
-              h("Button", {
-                props: {
-                  type: "success",
-                  size: "small",
-                  icon: "edit"
-                },
-                on: {
-                  click: () => {
-                    this.edit(params.index);
-                  }
-                }
-              })
             ]);
           }
         }
@@ -244,8 +219,8 @@ export default {
         });
       } else {
         self.$Notice.error({
-            title: 'Este Producto ya Existe',
-            desc: ''
+            title: 'Error!',
+            desc: 'Este Producto ya existe'
         });
       }
       //add total of sale
@@ -282,7 +257,7 @@ export default {
         })
         .catch(e => {
             self.$Notice.error({
-              title: 'Error',
+              title: 'Error!',
               desc: ''
           });
         });
@@ -294,16 +269,20 @@ export default {
         .then(r => {
           self.loading = false;
           self.$Notice.success({
-            title: 'Venta Realizada',
+            title: 'Venta Realizada!',
             desc: ''
         });
           EventBus.$emit('get')
           self.$router.push("/sales");
         })
         .catch(e => {
+               self.$Notice.config({
+            top: 70,
+            duration: 2.6
+          });
           self.$Notice.error({
-            title: 'Error',
-            desc: ''
+            title: "Error!",
+            desc: "Revise los campos"
           });
         });
     },
@@ -323,7 +302,10 @@ export default {
           this.form.sale.discount = 0;
         }
       this.form.products.splice(index, 1);
-    }
+    },
+    redirect() {
+      this.$router.push("/sales");
+    },
   }
 };
 </script>
