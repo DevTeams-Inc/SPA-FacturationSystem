@@ -23,8 +23,8 @@ export default {
     EventBus.$on("get", () => {
       self.getSoldOut();
       self.$Notice.warning({
-        title: "se agoto",
-        desc: "dasdsdsadasdsadsasdaasdsad"
+        title: "Se agoto",
+        desc: "Algunos productos se agotaron"
       });
     });
   },

@@ -223,7 +223,7 @@ export default {
       self.nameP = name;
       self.form.products.productId = productId;
       self.form.products.quantity = quantity;
-      self.quantityProduct = quantityProduct;
+      self.quantityProduct = quantityProduct; //original
       self.form.products.pricePerSale = pricePerSale;
       self.form.products.supplierId = supplierId;
       self.form.quantityN = quantity;
@@ -299,7 +299,10 @@ export default {
             title: 'Venta Realizada',
             desc: ''
         });
-          EventBus.$emit('get')
+            
+          if(self.form.products.quantity === self.quantityProduct ){
+            EventBus.$emit('get')
+          }
           self.$router.push("/sales");
         })
         .catch(e => {
