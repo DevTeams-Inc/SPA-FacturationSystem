@@ -251,8 +251,8 @@ export default {
       //add total of sale
       let cal = (quantity * pricePerSale);
       let itbis = (16 * ( (cal) / 100) );
-      this.form.sale.discount += itbis;
-      this.form.sale.total += (cal + itbis);
+      this.form.sale.discount += Math.round(itbis);
+      this.form.sale.total += Math.round(cal + itbis);
     },
     selectEmployee: function(name, employeeId) {
       let self = this;
@@ -316,8 +316,8 @@ export default {
         let pQ = price * qyt;
         let itbs = (16 * ( (pQ) / 100));
         let total = itbs + pQ;
-        this.form.sale.total -= total;
-        this.form.sale.discount -= itbs;
+        this.form.sale.total -= Math.round(total);
+        this.form.sale.discount -= Math.round(itbs);
         if(this.form.products.length == 1){
           this.form.sale.total = 0;
           this.form.sale.discount = 0;

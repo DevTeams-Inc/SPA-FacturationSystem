@@ -5,9 +5,8 @@ import ProductService from '../services/ProductService'
 import SupplierService from '../services/SupplierService'
 import SaleService from '../services/SaleService'
 
-//  let apiUrl = 'http://192.168.83.241:45455/'
-//let apiUrl = 'http://localhost:62432/';
-let apiUrl = "http://192.168.1.139:45455/"; //devTe
+let apiUrl = 'http://192.168.99.169:45455/' //en red
+// let apiUrl = 'http://192.168.99.169:45455/';
 
 // Axios Configuration
 Axios.defaults.headers.common.Accept = 'application/json'

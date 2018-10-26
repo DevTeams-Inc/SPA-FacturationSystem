@@ -20,7 +20,10 @@ export default {
   created() {
     let self = this;
     self.getSoldOut();
-    EventBus.$on("get", () => {
+  },
+  mounted() {
+    let self = this;
+     EventBus.$on("get", () => {
       self.getSoldOut();
       self.$Notice.warning({
         title: "se agoto",
