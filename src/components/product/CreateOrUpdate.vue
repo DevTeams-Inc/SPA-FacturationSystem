@@ -69,7 +69,7 @@
     
 </template>
 <script>
-
+import {EventBus} from '@/event-bus.js'
 import SupplierList from '@/components/product/SupplierList'
 
     export default {
@@ -152,7 +152,7 @@ import SupplierList from '@/components/product/SupplierList'
                             .update(self.form)
                             .then(r => {
                                 self.loading = false;
-                                
+                                EventBus.$emit('productEvent')
                                 self.$router.push('/products');
                                 self.$Message.success('Producto Actualizado');
                             })

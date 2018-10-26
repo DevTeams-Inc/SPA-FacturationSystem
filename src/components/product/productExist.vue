@@ -19,7 +19,6 @@ export default {
   },
   created() {
     let self = this;
-    self.getSoldOut();
     EventBus.$on("get", () => {
       self.getSoldOut();
       self.$Notice.warning({
@@ -27,6 +26,13 @@ export default {
         desc: "Algunos productos se agotaron"
       });
     });
+    EventBus.$on("productEvent", () => {
+      self.getSoldOut();       
+    })
+  },
+  mounted(){
+    let self = this;
+    self.getSoldOut();
   },
   methods: {    
     getSoldOut() {
@@ -38,7 +44,7 @@ export default {
           self.qyt = e.data.length;
         })
         .catch(e => {});
-    }
+    },
   }
 };
 </script>
