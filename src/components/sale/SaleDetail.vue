@@ -12,23 +12,23 @@
     <Form ref="form" :loading="loading" :model="form" :rules="ruleValidate" :label-width="80">
         <Row>
         
-        <Col span="5">
+        <Col span="8">
             <FormItem label="Cliente" prop="nameC">
             <Input v-model="form.sale.client.name+ ' ' +form.sale.client.lastName" readonly></Input>
             </FormItem>
         </Col>
         
-        </Row>
+       
 
-        <Row>
-        <Col span="5">
+ 
+        <Col span="8">
             <FormItem label="Empleado" prop="nameE">
             <Input v-model="form.sale.user.name" readonly></Input>
             </FormItem>
         </Col>
-        </Row>
+   
 
-        <Row>
+        
 
         <Col span="4">
         <!-- <FormItem label="Descuento" prop="discount">
@@ -39,7 +39,7 @@
         
         </Col>
 
-        <Col span="6">
+        <Col span="8">
         <FormItem label="Total" prop="Total">
            <InputNumber :max="form.sale.total" v-model="form.sale.total"
             :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
@@ -54,15 +54,15 @@
             <Table border :columns="columns" :data="form.products"></Table>
         </Row>
         <Row>
-        <br>
         <FormItem>
-        <Col span="6" offset="6">
-            <Button type="error" @click="redirect()" icon="ios-arrow-back">Regresar</Button>
+        <Col class="button" span="12" offset="6">
             <Button type="success" @click="save(); pdf()" icon="ios-copy-outline">Imprimir</Button>
         </Col>   
         </FormItem>
         </Row>
-    </Form>
+      </Form>
+            <Button class="backd" @click="redirect()" icon="ios-arrow-back">Back</Button>
+
     </div>
     
 </template>
@@ -108,21 +108,6 @@ export default {
             return h("div", [
               h("Button", {
                 props: {
-                  type: "primary",
-                  size: "small",
-                  icon: "search"
-                },
-                style: {
-                  marginRight: "5px"
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index);
-                  }
-                }
-              }),
-              h("Button", {
-                props: {
                   type: "error",
                   size: "small",
                   icon: "close"
@@ -136,18 +121,6 @@ export default {
                   }
                 }
               }),
-              h("Button", {
-                props: {
-                  type: "success",
-                  size: "small",
-                  icon: "edit"
-                },
-                on: {
-                  click: () => {
-                    this.edit(params.index);
-                  }
-                }
-              })
             ]);
           }
         }
@@ -281,3 +254,21 @@ export default {
   }
 };
 </script>
+<style>
+.button {
+  padding: 5%;
+}
+.backd {
+  position: relative;
+  float: right;
+  background-color: #515a6e;
+  color: aliceblue;
+  top: 52px;
+}
+.backd:hover {
+  background-color: #747b8b;
+  color: white;
+  outline: none;
+  }
+</style>
+

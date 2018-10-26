@@ -2,7 +2,7 @@
 <div>
     <Row>
         <Col span="10">
-        <h1>Inventario
+        <h1>Agotado
             <Icon type="ios-box" /></h1>
         </Col>
         <!-- <Col span="2" offset="9">
@@ -109,18 +109,18 @@ export default {
                                     }
                                 }
                             }),
-                            // h('Button', {
-                            //     props: {
-                            //         type: 'error',
-                            //         size: 'small',
-                            //         icon: 'close'
-                            //     },
-                            //     on: {
-                            //         click: () => {
-                            //             this.remove(params.index)
-                            //         }
-                            //     }
-                            // })
+                            h('Button', {
+                                props: {
+                                    type: 'success',
+                                    size: 'small',
+                                    icon: 'plus'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.edit(params.index)
+                                    }
+                                }
+                            })
                         ]);
                     }
                 }
@@ -155,6 +155,10 @@ export default {
         remove(index) {
             this.data6.splice(index, 1);
         },
+         edit(index){
+            this.$router.push(`/products/${this.data[index].productId}/edit`)
+        },
+        
         redirect(path) {
             if (path === undefined) return
             this.$router.push(path)

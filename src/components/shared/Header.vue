@@ -10,6 +10,7 @@
                     <Icon type="ios-keypad"></Icon>
                     Administrar
                 </template>
+                <MenuItem name="1-1"><span @click="redirect('/clients')"><Icon type="person"></Icon> Clientes</span></MenuItem>
                 <MenuItem name="1-2"><span @click="redirect('/employees')"><Icon type="person"></Icon> Empleados</span></MenuItem>
                 <MenuItem name="1-3"><span @click="redirect('/suppliers')"><Icon type="person-stalker"></Icon> Suplidores</span></MenuItem>
                 <MenuItem name="1-4"><span @click="redirect('/products')"><Icon type="ios-box"></Icon> Productos</span></MenuItem>

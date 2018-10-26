@@ -63,6 +63,9 @@
         </Row>  
        
     </Form>
+            <div>
+              <Button class="backc" @click="redirect()" icon="ios-arrow-back">Back</Button>
+           </div>
     </div>
     
 </template>
@@ -240,6 +243,9 @@ export default {
     },
     handleReset(form) {
       this.$refs[form].resetFields();
+    },
+    redirect() {
+      this.$router.push("/clients");
     }
   }
 };
@@ -248,6 +254,18 @@ export default {
 <style>
 .button{
  padding: 5%;
+}
+.backc{
+  position: relative;
+  float: right;
+  background-color: #515a6e;
+  color: aliceblue;
+  top: 22px;
+}
+.backc:hover{
+  background-color: #747b8b;
+   color:white;
+   outline: none;
 }
 </style>
 

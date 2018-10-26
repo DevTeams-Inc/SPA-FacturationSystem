@@ -3,7 +3,7 @@
 <template>
     <Badge :count="qyt" class="effect">
         <div class="m">
-        Inventario
+        Agotado
         </div>
     </Badge>
 </template>

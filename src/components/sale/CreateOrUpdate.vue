@@ -67,6 +67,10 @@
         </FormItem>
         </Row>
     </Form>
+           <div>
+              <Button class="backs" @click="redirect()" icon="ios-arrow-back">Back</Button>
+           </div>
+
     </div>
 </template>
 <script>
@@ -107,21 +111,6 @@ export default {
             return h("div", [
               h("Button", {
                 props: {
-                  type: "primary",
-                  size: "small",
-                  icon: "search"
-                },
-                style: {
-                  marginRight: "5px"
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index);
-                  }
-                }
-              }),
-              h("Button", {
-                props: {
                   type: "error",
                   size: "small",
                   icon: "close"
@@ -135,18 +124,6 @@ export default {
                   }
                 }
               }),
-              h("Button", {
-                props: {
-                  type: "success",
-                  size: "small",
-                  icon: "edit"
-                },
-                on: {
-                  click: () => {
-                    this.edit(params.index);
-                  }
-                }
-              })
             ]);
           }
         }
@@ -246,8 +223,8 @@ export default {
         });
       } else {
         self.$Notice.error({
-            title: 'Este Producto ya Existe',
-            desc: ''
+            title: 'Error!',
+            desc: 'Este Producto ya existe'
         });
       }
       //add total of sale
@@ -306,9 +283,13 @@ export default {
           self.$router.push("/sales");
         })
         .catch(e => {
+          self.$Notice.config({
+            top: 70,
+            duration: 2.6
+          });
           self.$Notice.error({
             title: 'Error',
-            desc: ''
+            desc: 'Revise los campos'
           });
         });
     },
@@ -328,7 +309,28 @@ export default {
           this.form.sale.discount = 0;
         }
       this.form.products.splice(index, 1);
-    }
+    },
+       redirect() {
+      this.$router.push("/sales");
+    },
   }
 };
 </script>
+<style>
+.button{
+  padding: 5%;
+}
+.backs{
+  position: relative;
+  float: right;
+  background-color: #515a6e;
+  color: aliceblue;
+  top: 22px;
+}
+.backs:hover{
+  background-color: #747b8b;
+   color:white;
+   outline: none;
+}
+</style>
+
