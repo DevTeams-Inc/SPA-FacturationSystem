@@ -7,17 +7,12 @@
             </FormItem>
         </Col>       
 </template>
-
 <script>
     export default {
         data(){
             return {
                 data: [],
-              
                     suppliers: '',
-          
-               
-                
             }
         },
     created() {
@@ -27,7 +22,6 @@
     methods: {
         getAll(){
             let supplier = this
-           
             supplier.$store.state.services.SupplierService
             .getAll()
             .then(s => {

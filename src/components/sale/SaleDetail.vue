@@ -3,68 +3,53 @@
         <Row>
         <Col span="10">
         <h1>
-            Detalle de la venta
+            Detalle de la venta 
             <Icon type="bag"></Icon>
+            <small>Fecha {{dateTime}}</small>
         </h1>
         </Col>
     </Row>
     <br>
     <Form ref="form" :loading="loading" :model="form" :rules="ruleValidate" :label-width="80">
-        <Row>
-        
+        <Row> 
         <Col span="8">
             <FormItem label="Cliente" prop="nameC">
             <Input v-model="form.sale.client.name+ ' ' +form.sale.client.lastName" readonly></Input>
             </FormItem>
         </Col>
-        
-       
-
- 
         <Col span="8">
             <FormItem label="Empleado" prop="nameE">
             <Input v-model="form.sale.user.name" readonly></Input>
             </FormItem>
         </Col>
-   
-
-        
-
         <Col span="4">
         <!-- <FormItem label="Descuento" prop="discount">
            <InputNumber :max="form.sale.discount" v-model="form.sale.discount"
             :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
             :parser="value => value.replace(/$s?|(,*)/g, '')"></InputNumber>
-        </FormItem> -->
-        
+        </FormItem> -->  
         </Col>
-
         <Col span="8">
         <FormItem label="Total" prop="Total">
            <InputNumber :max="form.sale.total" v-model="form.sale.total"
             :formatter="value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')"
             :parser="value => value.replace(/$s?|(,*)/g, '')" readonly></InputNumber>
         </FormItem>
-        
         </Col>
-          
         </Row>
-
         <Row>
             <Table border :columns="columns" :data="form.products"></Table>
         </Row>
         <Row>
         <FormItem>
         <Col class="button" span="12" offset="6">
-            <Button type="success" @click="save(); pdf()" icon="ios-copy-outline">Imprimir</Button>
+            <Button type="success" @click=" pdf()" icon="ios-copy-outline">Imprimir</Button>
         </Col>   
         </FormItem>
         </Row>
       </Form>
             <Button class="backd" @click="redirect()" icon="ios-arrow-back">Back</Button>
-
     </div>
-    
 </template>
 <script>
 import jsPDF from "jspdf";
@@ -135,16 +120,12 @@ export default {
     pageTitle() {
       let self = this;
       return "Agregar Venta";
+    },
+    dateTime(){
+      let self = this;
+      let value =new Date(self.form.sale.registerDate) ;
+      return `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`;
     }
-    // total: function(){
-    //     let total = []
-    //     Object.entries(this.products).forEach(([key, val])=> {
-    //         total.push(val.subTotal);
-    //     });
-    //     return (this.form.total = total.reduce(function(total, num){
-    //         return (total += Number(num))
-    //     }), 0);
-    // }
   },
   created() {
     let self = this;
@@ -159,36 +140,16 @@ export default {
       self.loading = true;
       self.$store.state.services.SaleService.get(id)
         .then(r => {
-          self.loading = false;
-          self.form.products = r.data.products;
-          self.form.sale = r.data.sale;
+          self.loading = false
+          self.form.products = r.data.products
+          self.form.sale = r.data.sale
+          self.form.sale.saleDate = r.data.saleDate
         })
         .catch(r => {
           self.$Notice.error({
             title: 'Error',
             desc: ''
           });
-        });
-    },
-    save() {
-      let self = this;
-
-      self.loading = true;
-
-      self.$store.state.services.SaleService.add(self.form)
-        .then(r => {
-          self.loading = false;
-          self.$Notice.success({
-            title: 'Venta Agregada',
-            desc: ''
-          });
-          self.$router.push("/sales");
-        })
-        .catch(r => {
-          self.$Notice.error({
-            title: 'Error',
-            desc: ''
-         });
         });
     },
     handleReset(form) {
@@ -209,6 +170,8 @@ export default {
       doc.line(10, 50, 200, 50);
       doc.setFontSize(20);
       doc.text(130, 20, "Codigo: " + self.form.sale.saleId);
+      let value = new Date(self.form.sale.registerDate)
+      self.form.sale.registerDate = `${value.getDate()}/${value.getMonth() + 1}/${value.getFullYear()}`
       doc.text(130, 40, "Fecha: " + self.form.sale.registerDate);
       doc.setFontSize(20);
       doc.text(10, 70, "Cliente: " + self.form.sale.client.name);
@@ -229,7 +192,6 @@ export default {
        {title: "Cantidad" , datakey:"quantity"},
        {title: "Precio" , datakey:"pricePerSale"},
       ];
-
       try {
         //this row is when the object product 
         //is created and inserted into the table
