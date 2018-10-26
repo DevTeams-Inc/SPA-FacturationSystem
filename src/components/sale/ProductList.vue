@@ -115,6 +115,7 @@
             self.data[index].name, 
             self.data[index].productId, 
             self.quantity,
+            self.data[index].quantity,
             self.data[index].pricePerSale,
             self.data[index].productCode,
             self.data[index].type,

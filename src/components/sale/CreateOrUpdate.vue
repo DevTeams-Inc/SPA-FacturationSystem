@@ -169,7 +169,7 @@ export default {
       productId: 0,
       supplierId: 0,
       quantity: 0,
-      quantityN: 0,
+      quantityProduct: 0,
       pricePerPurchase: 10,
       total: 10,
       ruleValidate: {
@@ -212,6 +212,7 @@ export default {
       name,
       productId,
       quantity,
+      quantityProduct,
       pricePerSale,
       productCode,
       type,
@@ -222,6 +223,7 @@ export default {
       self.nameP = name;
       self.form.products.productId = productId;
       self.form.products.quantity = quantity;
+      self.quantityProduct = quantityProduct;
       self.form.products.pricePerSale = pricePerSale;
       self.form.products.supplierId = supplierId;
       self.form.quantityN = quantity;
