@@ -22,6 +22,11 @@ class ProductService {
         return self.axios.get(`${self.baseUrl}/${id}`);
     }
 
+    getExistingProduct(){
+        let self = this;
+        return self.axios.get(`${self.baseUrl}/existings`)
+    }
+
     update(model) {
         let self = this;
         return self.axios.put(`${self.baseUrl}`, model);

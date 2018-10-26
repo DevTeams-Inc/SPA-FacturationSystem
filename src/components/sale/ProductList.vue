@@ -20,7 +20,8 @@
                 modalP: false,
                 data: [],
                 products: '',
-                q: '',
+                q: 0,
+                quantity: 0,
                 loading: false,
                 columns: [{
                     title: 'Name',
@@ -36,7 +37,8 @@
                                     type: 'number',
                                     min: 1,
                                     max: parseInt(this.q),
-                                    value: this.data[params.index].quantity
+                                    value: parseInt(this.data[params.index].quantity),
+                                    editable: false
                                 },
                                 style: {
                                     width: '40%'
@@ -81,19 +83,21 @@
         },
     created() {
     let product = this
-    product.getAll()
+    product.getExistingProduct()
     },
     methods: {
-        getAll(){
+        getExistingProduct(){
             let product = this
             product.loading = true
             product.$store.state.services.ProductService
-            .getAll()
+            .getExistingProduct()
             .then(p => {
                 product.loading = false
                 product.data = p.data
             })
-            .catch()
+            .catch(e =>{
+                
+            })
         },
         getId(value){
             let self = this
@@ -101,10 +105,16 @@
         },
         show(index){
             let self = this
+            if(self.q == 0){
+                self.quantity = self.data[index].quantity;
+            }
+            if(self.q != 0){
+                self.quantity = self.q;
+            }
             self.$emit('getIdSelected', 
             self.data[index].name, 
             self.data[index].productId, 
-            self.q,
+            self.quantity,
             self.data[index].pricePerSale,
             self.data[index].productCode,
             self.data[index].type,

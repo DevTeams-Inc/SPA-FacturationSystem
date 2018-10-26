@@ -118,7 +118,7 @@ export default new Router({
     },
     {
       path: '/sold-out',
-      name: 'Productos Agotados',
+      name: 'Inventario',
       component: SoldOut
     }
   ]
