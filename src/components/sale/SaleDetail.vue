@@ -43,7 +43,7 @@
         <Row>
         <FormItem>
         <Col class="button" span="12" offset="6">
-            <Button type="success" @click=" pdf()" icon="ios-copy-outline">Imprimir</Button>
+            <Button type="success" @click="pdf()" icon="ios-copy-outline">Imprimir</Button>
         </Col>   
         </FormItem>
         </Row>
@@ -206,6 +206,11 @@ export default {
         });
         doc.autoTable(columns, rows, { margin: { top: 140 } });
         doc.save(`Factura-${self.form.sale.saleId}.pdf`);
+        this.$Notice.success({
+          title: 'Factura Generada',
+          desc: ''
+        });
+        this.$router.push("/sales");
       } catch (e) {
         self.$Notice.success({
             title: 'Error',

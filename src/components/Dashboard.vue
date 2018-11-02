@@ -80,7 +80,7 @@
                         <img src="../assets/images/delivery-cart.png" height="64px" width="64px">
                     
                     <br>
-                    <h3>Inventario</h3>
+                    <h3>Agotados</h3>
                 </Button>
             </div>
         </Card>
